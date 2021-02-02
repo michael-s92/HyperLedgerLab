@@ -1,0 +1,15 @@
+{
+  "name": "notarization_benchmark",
+  "version": "1.0.0",
+  "description": "Package to support benchmark testing with a notarization application",
+  "author": "Milan Stefanovic",
+  "license": "ISC",
+  "dependencies": {
+    "fabric-contract-api": "1.4.1",
+    "fabric-shim": "1.4.1",
+    "read-yaml": "1.1.0",
+    "unirand": "2.4.5",
+    "deck": "0.0.4",
+    "random-picker": "1.0.0"
+  }
+}
