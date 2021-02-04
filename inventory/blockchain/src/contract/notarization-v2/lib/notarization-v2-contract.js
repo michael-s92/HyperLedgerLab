@@ -37,7 +37,7 @@ class NotarizationV2Contract extends Contract {
             // save document to the state
             await ctx.stub.putState(doc.documentId, Buffer.from(JSON.stringify(newdoc)));
 
-            /*
+            
             // save all readers of the document
             for(const reader of doc.readers){
                 let obj = new Reader(reader, doc.documentId);
@@ -45,7 +45,6 @@ class NotarizationV2Contract extends Contract {
                 let documentReaderIndexKey = await ctx.stub.createCompositeKey(documentReaderIndexName, [doc.documentId, reader]);
                 await ctx.stub.putState(documentReaderIndexKey, Buffer.from(JSON.stringify(obj)));
             }
-            */
         }
 
         console.log('=========== END  : initLedger Transaction');
@@ -80,7 +79,7 @@ class NotarizationV2Contract extends Contract {
             studentId: studentId
         };
 
-        let resultIterator = await ctx.stub.getQueryResult(docExistQueryString);
+        let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(docExistQueryString));
         await Helper.throwErrorIfStateExists(resultIterator, `There is already input for student ${studentId} from ${custodianId} with hash: ${documentHash}`);
       
         // get state key

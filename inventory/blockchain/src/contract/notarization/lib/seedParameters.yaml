@@ -1,6 +1,6 @@
-allStudent: 100
-allCustodian: 10
-allReader: 1000
+allStudent: 30
+allCustodian: 3
+allReader: 50
 idSize: 10
 keySize: 50
 document_length: 1024

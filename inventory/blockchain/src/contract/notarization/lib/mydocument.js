@@ -9,23 +9,19 @@ const crevoked = 'revoked';
 
 class MyDocument {
 
-    constructor(documentHash, custodianId, custodianHash, studentId, studentHash, readerList) {
+    constructor(documentHash, custodianId, custodianHash, studentId, studentHash, status, readerList) {
         this.docType = 'my-document';
         this.documentHash = documentHash;
         this.custodianId = custodianId;
         this.custodianHash = custodianHash;
         this.studentId = studentId;
         this.studentHash = studentHash;
-        this.status = cvalid;
+        this.status = (status === undefined) ? cvalid : status;
         this.readerList = (readerList === undefined) ? [] : readerList;
     }
 
     setRevoked() {
         this.status = crevoked;
-    }
-
-    getStatus() {
-        return this.status;
     }
 
     addReader(readerName) {
@@ -50,7 +46,7 @@ class MyDocument {
 
     static fromJSON(obj) {
         if (obj.documentHash !== undefined && obj.custodianId !== undefined && obj.custodianHash !== undefined && obj.studentId !== undefined && obj.studentHash !== undefined) {
-            return new MyDocument(obj.documentHash, obj.custodianId, obj.custodianHash, obj.studentId, obj.studentHash, obj.readerList);
+            return new MyDocument(obj.documentHash, obj.custodianId, obj.custodianHash, obj.studentId, obj.studentHash, obj.status, obj.readerList);
         }
     }
 }

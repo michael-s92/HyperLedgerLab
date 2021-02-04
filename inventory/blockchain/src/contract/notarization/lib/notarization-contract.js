@@ -24,6 +24,8 @@ class NotarizationContract extends Contract {
     async initLedger(ctx) {
         console.log('=========== START: initLedger Transaction');
 
+        const status = 'valid';
+
         for(const doc of seeds.initLedgerDocuments){
             // create key for storing data
             let key = doc.custodian.id.toString() + doc.student.id.toString();
@@ -31,7 +33,7 @@ class NotarizationContract extends Contract {
             // create document object
             let custodianHash = sha512(doc.custodian.key);
             let studentHash = sha512(doc.student.key);
-            let newdoc = new MyDocument(doc.documentHash, doc.custodian.id, custodianHash, doc.student.id, studentHash);
+            let newdoc = new MyDocument(doc.documentHash, doc.custodian.id, custodianHash, doc.student.id, studentHash, status, doc.readers);
 
             // save document to the state
             await ctx.stub.putState(key, Buffer.from(JSON.stringify(newdoc)));
@@ -108,7 +110,7 @@ class NotarizationContract extends Contract {
             docjson = JSON.parse(docAsBytes.toString());
         } catch(err) {
             let responsejson = {};
-            responsejson.description = `Failed to decode JSON for student ${studentId} from ${custodianId} doesnt exist`;
+            responsejson.description = `Failed to decode JSON for student ${studentId} from ${custodianId}`;
             responsejson.error = err.description;
             throw new Error(responsejson);
         }
@@ -151,7 +153,7 @@ class NotarizationContract extends Contract {
             docjson = JSON.parse(docAsBytes.toString());
         } catch(err) {
             let responsejson = {};
-            responsejson.description = `Failed to decode JSON for student ${studentId} from ${custodianId} doesnt exist`;
+            responsejson.description = `Failed to decode JSON for student ${studentId} from ${custodianId}`;
             responsejson.error = err.description;
             throw new Error(responsejson);
         }
@@ -199,7 +201,7 @@ class NotarizationContract extends Contract {
             docjson = JSON.parse(docAsBytes.toString());
         } catch(err) {
             let responsejson = {};
-            responsejson.description = `Failed to decode JSON for student ${studentId} from ${custodianId} doesnt exist`;
+            responsejson.description = `Failed to decode JSON for student ${studentId} from ${custodianId}`;
             responsejson.error = err.description;
             throw new Error(responsejson);
         }
