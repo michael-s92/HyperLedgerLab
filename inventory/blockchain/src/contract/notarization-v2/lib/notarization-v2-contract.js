@@ -13,7 +13,6 @@ const sha512 = require('js-sha512');
 
 const seeds = require('./seeds.json');
 
-const documentReaderIndexName = 'document~reader';
 
 class NotarizationV2Contract extends Contract {
 
@@ -37,15 +36,18 @@ class NotarizationV2Contract extends Contract {
             // save document to the state
             await ctx.stub.putState(doc.documentId, Buffer.from(JSON.stringify(newdoc)));
 
-            /*
+            
             // save all readers of the document
             for(const reader of doc.readers){
                 let obj = new Reader(reader, doc.documentId);
 
+                const documentReaderIndexName = 'document~reader';
+
                 let documentReaderIndexKey = await ctx.stub.createCompositeKey(documentReaderIndexName, [doc.documentId, reader]);
                 await ctx.stub.putState(documentReaderIndexKey, Buffer.from(JSON.stringify(obj)));
+                //await ctx.stub.putState(documentReaderIndexKey, Buffer.from('\u0000'));
             }
-            */
+            
         }
 
         console.log('=========== END  : initLedger Transaction');
@@ -142,6 +144,8 @@ class NotarizationV2Contract extends Contract {
 
         let reader = new Reader(readerName, documentKey);
 
+        const documentReaderIndexName = 'document~reader';
+
         let documentReaderIndexKey = await ctx.stub.createCompositeKey(documentReaderIndexName, [reader.documentKey, reader.name]);
         await ctx.stub.putState(documentReaderIndexKey, Buffer.from(JSON.stringify(reader)));
 
@@ -224,6 +228,8 @@ class NotarizationV2Contract extends Contract {
         let hashedKey = sha512(studentKey);
         if (hashedKey === doc.studentHash){
             // get the list of all reader
+
+            const documentReaderIndexName = 'document~reader';
 
             let docReaderResultsIterator = await ctx.stub.getStateByPartialCompositeKey(documentReaderIndexName, [documentKey]);
             let readers = await Helper.getAllResults(docReaderResultsIterator);

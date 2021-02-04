@@ -16,7 +16,7 @@ test:
 
   - label: common
     txDuration:
-    - 180
+    - 3
     rateControl:
     - type: fixed-rate
       opts:
