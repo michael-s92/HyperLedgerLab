@@ -42,7 +42,7 @@ elif [[ $1 = "java" ]]
 then
     echo "java - START"
     
-    if [[ ! -d .m2 ]]
+    if [[ ! -d ~/.m2 ]]
     then
         set -x
         sudo apt-get install openjdk-8-jdk
