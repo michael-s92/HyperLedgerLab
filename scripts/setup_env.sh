@@ -38,6 +38,9 @@ then
         npm run fabric-v1.4-deps
         set +x
     fi
+elif [[ $1 = "java" ]]
+then
+    echo "java"
 else
     # Setup python environment
     if [[ -d venv ]]

@@ -40,8 +40,8 @@ fabric_images:
 
 # Fabric Configuration
 # state_db options couchdb / goleveldb
-fabric_state_db: couchdb
-#fabric_state_db: goleveldb
+#fabric_state_db: couchdb
+fabric_state_db: goleveldb
 
 # Metrics framework setting
 # inventory_dir is an ansible variable which stores location of hosts.ini file
@@ -70,11 +70,17 @@ channels:                   # List of channel objects
 #        metadataPath: "{{ inventory_dir }}/src/contract/notarization/metadata/"
 #        language: node
 #        version: v1
-      - id: notarization-v2
-        contractID: notarization-v2               # NOTE: This should be unique for chaincodes across channels
-        path: "{{ inventory_dir }}/src/contract/notarization-v2/"      # NOTE: Path to Directory where chaincode file is located
-        metadataPath: "{{ inventory_dir }}/src/contract/notarization-v2/metadata/"
-        language: node
+#      - id: notarization-v2
+#        contractID: notarization-v2               # NOTE: This should be unique for chaincodes across channels
+#        path: "{{ inventory_dir }}/src/contract/notarization-v2/"      # NOTE: Path to Directory where chaincode file is located
+#        metadataPath: "{{ inventory_dir }}/src/contract/notarization-v2/metadata/"
+#        language: node
+#        version: v1
+      - id: simple2
+        contractID: simple2               # NOTE: This should be unique for chaincodes across channels
+        path: "{{ inventory_dir }}/src/contract/simple2/"      # NOTE: Path to Directory where chaincode file is located
+        metadataPath: "" #"{{ inventory_dir }}/src/contract/simple2/metadata/"
+        language: java
         version: v1
 #      - id: supplychain
 #        contractID: supplychain               # NOTE: This should be unique for chaincodes across channels
