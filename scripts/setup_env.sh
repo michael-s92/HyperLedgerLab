@@ -40,7 +40,19 @@ then
     fi
 elif [[ $1 = "java" ]]
 then
-    echo "java"
+    echo "java - START"
+    
+    if [[ ! -d .m2 ]]
+    then
+        set -x
+        sudo apt-get install openjdk-8-jdk
+        java -version
+        sudo apt install maven
+        mvn -version
+        set +x
+    fi
+    
+    echo "java - END"
 else
     # Setup python environment
     if [[ -d venv ]]
