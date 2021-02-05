@@ -48,11 +48,12 @@ then
         curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
         sudo apt-get install -y nodejs
         sudo npm install -g npm
+        npm install
+        npm run fabric-v1.4-deps
+        
         set +x
     fi
-    npm install
-    npm run fabric-v1.4-deps
-        
+    
     if [[ ! -d ~/.m2 ]]
     then
         set -x
