@@ -1,6 +1,5 @@
 package tutorial.chaincode;
 
-import com.google.gson.JsonObject;
 import org.hyperledger.fabric.shim.ChaincodeBase;
 import org.hyperledger.fabric.shim.ChaincodeStub;
 import org.hyperledger.fabric.shim.ledger.KeyModification;
