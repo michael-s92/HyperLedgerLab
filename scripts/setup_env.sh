@@ -38,6 +38,12 @@ then
         npm run fabric-v1.4-deps
         set +x
     fi
+elif [[ $1 = "java" ]]
+then
+    set -x
+    sudo apt install openjdk-8-jdk
+    sudo apt install gradle
+    set +x
 else
     # Setup python environment
     if [[ -d venv ]]
