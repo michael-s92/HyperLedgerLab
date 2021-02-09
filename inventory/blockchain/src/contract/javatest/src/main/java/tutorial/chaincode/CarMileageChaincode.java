@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 public class CarMileageChaincode extends ChaincodeBase {
 
 
-    private static Log LOG = LogFactory.getLog(CarMileageChaincode.class);
+    //private static Log LOG = LogFactory.getLog(CarMileageChaincode.class);
 
     public static final String INITLEDGER_FUNCTION = "initLedger";
     public static final String DONOTHING_FUNCTION = "doNothing";
@@ -29,7 +29,7 @@ public class CarMileageChaincode extends ChaincodeBase {
     public Response invoke(ChaincodeStub chaincodeStub) {
 
         String functionName = chaincodeStub.getFunction();
-        LOG.info("function name: "+ functionName);
+        //LOG.info("function name: "+ functionName);
 
 
         List<String> paramList = chaincodeStub.getParameters();
