@@ -41,8 +41,15 @@ then
 elif [[ $1 = "java" ]]
 then
     set -x
+    sudo apt-get remove openjdk-8-jdk gradle
+    sudo apt-get update
+    sudo apt-get upgrade
     sudo apt install openjdk-8-jdk
-    sudo apt install gradle
+    
+    wget https://services.gradle.org/distributions/gradle-5.0-bin.zip
+    sudo mkdir /opt/gradle
+    unzip -d /opt/gradle gradle-5.0-bin.zip
+    export PATH=$PATH:/opt/gradle/gradle-5.0/bin
     set +x
 else
     # Setup python environment
