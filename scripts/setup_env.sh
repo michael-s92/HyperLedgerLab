@@ -48,6 +48,7 @@ then
     sudo apt install openjdk-8-jdk
     
     wget https://services.gradle.org/distributions/gradle-5.0-bin.zip
+    sudo rm -rf /opt/gradle
     sudo mkdir /opt/gradle
     sudo unzip -d /opt/gradle gradle-5.0-bin.zip
     export PATH=$PATH:/opt/gradle/gradle-5.0/bin
