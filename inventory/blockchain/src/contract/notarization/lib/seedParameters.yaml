@@ -1,7 +1,7 @@
-allCustodian: 3
+allCustodian: 10
 allReader: 50
 idSize: 10
 keySize: 50
 document_length: 1024
 initDocuments: 100
-newDocuments: 5000
+newDocuments: 10000
