@@ -3,5 +3,5 @@ allReader: 50
 idSize: 10
 keySize: 50
 document_length: 1024
-initDocuments: 50
-newDocuments: 25
+initDocuments: 100
+newDocuments: 1000
