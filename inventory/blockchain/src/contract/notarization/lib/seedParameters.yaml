@@ -4,4 +4,4 @@ idSize: 10
 keySize: 50
 document_length: 1024
 initDocuments: 100
-newDocuments: 1000
+newDocuments: 5000
