@@ -52,7 +52,7 @@ module.exports.run = function () {
     const testPick = pick(testCasePermuationWeighted);
 
     //let testPick = deck.pick(testCasePermuation); //uniformPick
-    console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[testPick]);
+    //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[testPick]);
 
     let args = ALLTESTCASE[testPick].get();
 
