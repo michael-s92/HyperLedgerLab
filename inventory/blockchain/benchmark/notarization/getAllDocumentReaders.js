@@ -10,16 +10,16 @@ class getAllDocumentReaders {
 	    let args;
 
         /*
-            3 different scenario for this test
+            2 different scenario for this test
             1) get all data for arg random
             2) get random document from initLedgerDocuments
-            3) get random document from benchmarkDocuments
         */
 
+        //probability for wrong data - 0.5%
         let scenario = utils.getRandomInt(3);
 
         if(scenario === 0){
-
+            console.log("---- RANDOM DATA");
             // select random student
             let randomAccessKey = 0;
             do{
@@ -43,32 +43,15 @@ class getAllDocumentReaders {
                     chaincodeArguments: [custodian.id, student.id, student.key]
                 };
 
-        } else if (scenario == 1){
+        } else {
 
             // select random document from initLedgerDocuments
             let randomAccessKey = 0;
             do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.initLedgerDocuments[randomAccessKey] === undefined);
+                randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
+            } while(seeds.initDocuments[randomAccessKey] === undefined);
 
-            let doc = seeds.initLedgerDocuments[randomAccessKey];
-
-            // getAllDocumentReaders(ctx, custodianId, studentId, studentKey)
-
-            args = {
-                    chaincodeFunction: 'getAllDocumentReaders',
-                    chaincodeArguments: [doc.custodian.id, doc.student.id, doc.student.key]
-                };
-
-        } else {
-            
-            // select random document from benchmarkDocuments
-            let randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.benchmarkDocuments[randomAccessKey] === undefined);
-
-            let doc = seeds.benchmarkDocuments[randomAccessKey];
+            let doc = seeds.initDocuments[randomAccessKey];
 
             // getAllDocumentReaders(ctx, custodianId, studentId, studentKey)
 
@@ -77,7 +60,7 @@ class getAllDocumentReaders {
                     chaincodeArguments: [doc.custodian.id, doc.student.id, doc.student.key]
                 };
 
-        }
+        } 
 
 	    return args;
 
