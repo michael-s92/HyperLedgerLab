@@ -16,10 +16,10 @@ class getAllDocumentReaders {
         */
 
         //probability for wrong data - 0.5%
-        let scenario = utils.getRandomInt(3);
+        let scenario = utils.getRandomInt(200);
 
         if(scenario === 0){
-            console.log("---- RANDOM DATA");
+
             // select random student
             let randomAccessKey = 0;
             do{

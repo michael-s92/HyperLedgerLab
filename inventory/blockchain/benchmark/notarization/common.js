@@ -40,12 +40,10 @@ module.exports.init = function (blockchain, context, args) {
 };
 module.exports.run = function () {
 
-    //let uniformPick = deck.pick(testCasePermuation);
+    let uniformPick = deck.pick(testCasePermuation);
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
-    //let args = ALLTESTCASE[uniformPick].get();
-
-    let args = ALLTESTCASE[3].get();
+    let args = ALLTESTCASE[uniformPick].get();
 
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);
