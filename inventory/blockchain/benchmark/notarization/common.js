@@ -45,7 +45,7 @@ module.exports.run = function () {
 
     //let args = ALLTESTCASE[uniformPick].get();
 
-    let args = ALLTESTCASE[1].get();
+    let args = ALLTESTCASE[2].get();
 
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);

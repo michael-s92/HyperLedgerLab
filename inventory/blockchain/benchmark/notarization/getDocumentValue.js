@@ -25,11 +25,10 @@ class getDocumentValue {
 
 
         // lets set that just 0.5% of all cases can be an error with random data
-        let scenario = utils.getRandomInt(2);
+        let scenario = utils.getRandomInt(200);
 
         if(scenario === 0){
 
-            console.log("random podaci");
             // select random student
             randomAccessKey = 0;
             do{
@@ -54,8 +53,7 @@ class getDocumentValue {
                 };
 
         } else {
-
-            console.log("value za doc");
+            
             // select random document from initDocuments
             randomAccessKey = 0;
             do{
