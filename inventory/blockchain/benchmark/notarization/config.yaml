@@ -23,6 +23,16 @@ test:
 #        tps: 200
 #    callback: ../inventory/blockchain/benchmark/notarization/common.js
 
+  - label: common
+    txNumber:
+    - 1             
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 1
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+# ------------------------------
+
   - label: readBlockchain
     txNumber:
     - 1
