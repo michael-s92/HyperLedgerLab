@@ -12,7 +12,7 @@ const parameters = read.sync('seedParameters.yaml');
 let allReader = [];
 let allCustodian = [];
 let allStudent = [];
-let initLedgerDocuments = [];
+let initDocuments = [];
 let benchmarkDocuments = [];
 
 function generateIdKeyPair(id_size, key_size){
@@ -98,7 +98,7 @@ while(i < parameters.allStudent){
         let doc = generateDocument(pair, allCustodian, allReader);
 
         if(Math.random() < 0.75){
-            initLedgerDocuments.push(doc);
+            initDocuments.push(doc);
         } else {
             benchmarkDocuments.push(doc);
         }
@@ -114,7 +114,7 @@ const json = JSON.stringify({
     allReader: allReader,
     allCustodian: allCustodian,
     allStudent: allStudent,
-    initLedgerDocuments: initLedgerDocuments,
+    initDocuments: initDocuments,
     benchmarkDocuments: benchmarkDocuments
 }, null, 4);
 
