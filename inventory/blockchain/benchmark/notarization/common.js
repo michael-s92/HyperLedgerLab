@@ -5,6 +5,7 @@ const getDocumentValue = require('./getDocumentValue');
 const revokeDocument = require('./revokeDocument');
 const getAllDocumentReaders = require('./getAllDocumentReaders');
 
+const pick = require('pick-random-weighted');
 var deck = require('deck');
 
 const ALLTESTCASE = [
@@ -21,6 +22,14 @@ let testCasePermuation = [
     2,
     3
 ];
+
+const ALLTESTCASE_WEIGHTED = [
+        [ addDocument, 20 ],
+        [ getDocumentValue, 100 ],
+        [ revokeDocument, 10 ],
+        [ getAllDocumentReaders, 40 ]
+];
+    
 
 function isDefined(t) {
   if (t === undefined) {
@@ -40,11 +49,14 @@ module.exports.init = function (blockchain, context, args) {
 };
 module.exports.run = function () {
 
-    let uniformPick = deck.pick(testCasePermuation);
+    //let uniformPick = deck.pick(testCasePermuation);
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
-    let args = ALLTESTCASE[uniformPick].get();
+    //let args = ALLTESTCASE[uniformPick].get();
 
+    const testInd = pick(ALLTESTCASE_WEIGHTED);
+    let args = ALLTESTCASE[testInd].get();
+    console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[testInd]);
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');
