@@ -17,7 +17,6 @@ class addDocument {
 
         let doc = seeds.benchmarkDocuments[randomAccessKey];
 
-        console.log("document to store: " + JSON.stringify(doc));
         // addDocument(ctx, documentHash, custodianId, custodianKey, studentId, studentKey)
 
 	    args = {
