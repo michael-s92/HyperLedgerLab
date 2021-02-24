@@ -14,15 +14,25 @@ test:
         tps: 1
     callback: ../inventory/blockchain/benchmark/notarization-v2/initLedger.js
 
-  - label: common
-    txDuration:
-    - 180
+ # - label: common
+ #   txDuration:
+ #   - 180
+ #   rateControl:
+ #   - type: fixed-rate
+ #     opts:
+ #       tps: 200
+ #   callback: ../inventory/blockchain/benchmark/notarization-v2/common.js
+
+ - label: common
+    txNumber:
+    - 1             
     rateControl:
     - type: fixed-rate
       opts:
-        tps: 200
+        tps: 1
     callback: ../inventory/blockchain/benchmark/notarization-v2/common.js
-
+# --------------------------
+  
   - label: readBlockchain
     txNumber:
     - 1

@@ -15,7 +15,7 @@ let allReader = [];
 let allCustodian = [];
 let allStudent = [];
 let allDocId = [];
-let initLedgerDocuments = [];
+let initDocuments = [];
 let benchmarkDocuments = [];
 
 function generateIdKeyPair(id_size, key_size){
@@ -96,7 +96,23 @@ while(i < parameters.allCustodian){
 
 i = 0;
 let docKey = new DocumentKey(0);
-while(i < parameters.allStudent){
+while(i < parameters.initDocuments){
+    let pair = generateIdKeyPair(id_size, key_size);
+    var index = allStudent.findIndex(x => x.id === pair.id);
+    if(index === -1){
+        allStudent.push(pair);
+
+        let doc = generateDocument(pair, allCustodian, allReader, docKey);
+        initDocuments.push(doc);
+
+        i++;
+    } else {
+        console.log(`${pair.id} already exists`);
+    }
+}
+
+i = 0;
+while(i < parameters.newDocuments){
     let pair = generateIdKeyPair(id_size, key_size);
     var index = allStudent.findIndex(x => x.id === pair.id);
     if(index === -1){
@@ -104,12 +120,7 @@ while(i < parameters.allStudent){
 
         let doc = generateDocument(pair, allCustodian, allReader, docKey);
 
-        if(Math.random() < 0.75){
-            initLedgerDocuments.push(doc);
-        } else {
-            benchmarkDocuments.push(doc);
-        }
-
+        benchmarkDocuments.push(doc);
 
         i++;
     } else {
@@ -122,7 +133,7 @@ const json = JSON.stringify({
     allCustodian: allCustodian,
     allStudent: allStudent,
     allDocId: allDocId,
-    initLedgerDocuments: initLedgerDocuments,
+    initDocuments: initDocuments,
     benchmarkDocuments: benchmarkDocuments
 }, null, 4);
 
