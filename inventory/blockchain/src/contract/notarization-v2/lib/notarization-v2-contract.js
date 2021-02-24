@@ -28,7 +28,6 @@ class NotarizationV2Contract extends Contract {
     async initLedger(ctx) {
         console.log('=========== START: initLedger Transaction');
 
-        console.log("==== INIT: " + JSON.stringify(new DocumentKey()));
         await ctx.stub.putState(DocumentKey.getKey(), Buffer.from(JSON.stringify(new DocumentKey())));
 
         for(const doc of seeds.initDocuments){
@@ -94,12 +93,10 @@ class NotarizationV2Contract extends Contract {
 
         let docKey;
         try{
-            console.log("1 AddDoc: " + keyAsBytes.toString());
             let json = JSON.parse(keyAsBytes.toString());
-            console.log("2 AddDoc: " + json);
             docKey = DocumentKey.fromJSON(json);
         } catch(err){
-            throw new Error(`Failed to decode JSON for DocumentKey: ${err.description}`);
+            throw new Error(`Failed to decode JSON for DocumentKey: ${err} \n json: ${json} \n keyAsBytes: ${keyAsBytes.toString()}`);
         }
         
 
