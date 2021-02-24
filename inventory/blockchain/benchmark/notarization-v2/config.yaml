@@ -23,7 +23,7 @@ test:
  #       tps: 200
  #   callback: ../inventory/blockchain/benchmark/notarization-v2/common.js
 
- - label: common
+  - label: common
     txNumber:
     - 1             
     rateControl:
@@ -32,7 +32,7 @@ test:
         tps: 1
     callback: ../inventory/blockchain/benchmark/notarization-v2/common.js
 # --------------------------
-  
+
   - label: readBlockchain
     txNumber:
     - 1
