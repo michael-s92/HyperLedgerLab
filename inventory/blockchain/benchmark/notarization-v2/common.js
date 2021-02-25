@@ -48,12 +48,12 @@ module.exports.init = function (blockchain, context, args) {
 };
 module.exports.run = function () {
 
-    //const testPick = pick(testCasePermuationWeighted);
-
-    let uniformPick = deck.pick(testCasePermuation);
+    const testPick = pick(testCasePermuationWeighted);
+    console.log("IZABRAN TEST: " + testPick);
+    //let uniformPick = deck.pick(testCasePermuation);
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
-    let args = ALLTESTCASE[3].get();
+    let args = ALLTESTCASE[testPick].get();
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization-v2', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');

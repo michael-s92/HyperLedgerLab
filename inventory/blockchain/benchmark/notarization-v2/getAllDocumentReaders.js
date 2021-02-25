@@ -15,11 +15,10 @@ class getAllDocumentReaders {
             2) get random document from initDocuments
         */
 
-        let scenario = utils.getRandomInt(3); //200
+        let scenario = utils.getRandomInt(200);
 
         // probability 0.5% to chose all random data
         if(scenario === 0){
-            console.log("random choosen");
 
             // select random student
             let randomAccessKey = 0;
@@ -46,7 +45,7 @@ class getAllDocumentReaders {
 
         } else {
 
-            // select random document from initLedgerDocuments
+            // select random document from initDocuments
             let randomAccessKey = 0;
             do{
                 randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
