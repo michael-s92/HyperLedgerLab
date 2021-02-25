@@ -26,7 +26,7 @@ class DocumentKey {
 
     static fromJSON(obj) {
         if (obj.nextId !== undefined) {
-            return new MyDocument(obj.nextId);
+            return new DocumentKey(obj.nextId);
         }
     }
 }
