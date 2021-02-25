@@ -96,7 +96,7 @@ class NotarizationV2Contract extends Contract {
             let json = JSON.parse(keyAsBytes.toString());
             docKey = DocumentKey.fromJSON(json);
         } catch(err){
-            throw new Error(`json: ${json} ... keyAsBytes: ${keyAsBytes.toString()} ... Failed to decode JSON for DocumentKey: ${err}`);
+            throw new Error(`Failed to decode JSON for DocumentKey: ${err}`);
         }
         
 

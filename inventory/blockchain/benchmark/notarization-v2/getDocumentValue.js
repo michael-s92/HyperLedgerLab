@@ -17,19 +17,20 @@ class getDocumentValue {
 
         let reader = seeds.allReader[randomAccessKey];      
 
+        
         // select random documentKey
         randomAccessKey = 0;
         do{
-            randomAccessKey = utils.getRandomInt(seeds.allDocId.length);
-        } while(seeds.allDocId[randomAccessKey] === undefined);
+            randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
+        } while(seeds.initDocuments[randomAccessKey] === undefined);
 
-        let docId = seeds.allDocId[randomAccessKey];
+        let doc = seeds.initDocuments[randomAccessKey];
 
         // getDocumentValue(ctx, documentKey, readerName)
 
         args = {
                 chaincodeFunction: 'getDocumentValue',
-                chaincodeArguments: [docId, reader]
+                chaincodeArguments: [doc.documentId, reader]
             };
 
 	    return args;
