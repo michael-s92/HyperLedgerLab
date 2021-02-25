@@ -10,16 +10,16 @@ class revokeDocument {
 	    let args;
 
         /*
-            3 different scenario for this test
+            2 different scenario for this test
             1) get all data for arg random
-            2) get random document from initLedgerDocuments
-            3) get random document from benchmarkDocuments
+            2) get random document from initDocuments
         */
 
-        let scenario = utils.getRandomInt(3);
+        let scenario = utils.getRandomInt(3); //200
 
+        //all random with 0.5% probability
         if(scenario === 0){
-
+            console.log("random choosen");
             // select random document id
             let randomAccessKey = 0;
             do{
@@ -43,15 +43,15 @@ class revokeDocument {
                     chaincodeArguments: [docId, custodian.key]
                 };
 
-        } else if (scenario == 1){
+        } else {
 
-            // select random document from initLedgerDocuments
+            // select random document from initDocuments
             let randomAccessKey = 0;
             do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.initLedgerDocuments[randomAccessKey] === undefined);
+                randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
+            } while(seeds.initDocuments[randomAccessKey] === undefined);
 
-            let doc = seeds.initLedgerDocuments[randomAccessKey];
+            let doc = seeds.initDocuments[randomAccessKey];
 
             // revokeDocument(ctx, documentKey, custodianKey) 
 
@@ -60,24 +60,7 @@ class revokeDocument {
                     chaincodeArguments: [doc.documentId, doc.custodian.key]
                 };
 
-        } else {
-            
-            // select random document from benchmarkDocuments
-            let randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.benchmarkDocuments[randomAccessKey] === undefined);
-
-            let doc = seeds.benchmarkDocuments[randomAccessKey];
-
-            // revokeDocument(ctx, documentKey, custodianKey)
-
-            args = {
-                    chaincodeFunction: 'revokeDocument',
-                    chaincodeArguments: [doc.documentId, doc.custodian.key]
-                };
-
-        }
+        } 
 
 	    return args;
 
