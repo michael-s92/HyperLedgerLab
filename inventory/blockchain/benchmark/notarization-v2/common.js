@@ -53,7 +53,7 @@ module.exports.run = function () {
     let uniformPick = deck.pick(testCasePermuation);
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
-    let args = ALLTESTCASE[2].get();
+    let args = ALLTESTCASE[3].get();
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization-v2', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');

@@ -15,11 +15,11 @@ class revokeDocument {
             2) get random document from initDocuments
         */
 
-        let scenario = utils.getRandomInt(3); //200
+        let scenario = utils.getRandomInt(200);
 
         //all random with 0.5% probability
         if(scenario === 0){
-            console.log("random choosen");
+
             // select random document id
             let randomAccessKey = 0;
             do{
