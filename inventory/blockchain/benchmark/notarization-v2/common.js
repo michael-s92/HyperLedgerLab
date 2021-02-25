@@ -49,7 +49,6 @@ module.exports.init = function (blockchain, context, args) {
 module.exports.run = function () {
 
     const testPick = pick(testCasePermuationWeighted);
-    console.log("IZABRAN TEST: " + testPick);
     //let uniformPick = deck.pick(testCasePermuation);
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
