@@ -114,7 +114,7 @@ func (t *DigitalHealthPassportChaincode) registerHolder(stub shim.ChaincodeStubI
 	if err != nil {
 		return shim.Error("Failed to get holder: " + err.Error())
 	} else if holderAsBytes != nil {
-		ftm.Println("This holder already exists: " + holderId)
+		fmt.Println("This holder already exists: " + holderId)
 		return shim.Error("This holder already exists: " + holderId)
 	}
 
@@ -122,7 +122,7 @@ func (t *DigitalHealthPassportChaincode) registerHolder(stub shim.ChaincodeStubI
 	objectType := "holder"
 	holder := &holder{objectType, holderId, holderPublicKey, travelDoc}
 
-	holderJsonBytes, err = json.Marshal(holder)
+	holderJsonBytes, err := json.Marshal(holder)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
