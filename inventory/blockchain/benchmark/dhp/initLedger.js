@@ -32,8 +32,6 @@ module.exports.init = function(blockchain, context, args) {
 
 module.exports.run = function() {
     txIndex++;
-
-    console.log("INPUT: " + seeds);
     
     let args;
     if (bc.bcType === 'fabric-ccp') {
