@@ -23,7 +23,7 @@ test:
 #        tps: 200
 #    callback: ../inventory/blockchain/benchmark/dhp/common.js
 
-  - label: initLedger
+  - label: common
     txNumber:
     - 1             
     rateControl:
