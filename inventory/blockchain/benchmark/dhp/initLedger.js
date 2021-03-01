@@ -21,8 +21,6 @@ module.exports.info  = 'Initializing Notarization.';
 let txIndex = 0;
 let bc, contx;
 
-const seeds = require('./seeds.json');
-
 module.exports.init = function(blockchain, context, args) {
     bc = blockchain;
     contx = context;

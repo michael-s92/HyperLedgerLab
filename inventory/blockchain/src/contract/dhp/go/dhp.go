@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"encoding/json"
+	"os"
+	"io/ioutil"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
@@ -16,19 +18,25 @@ type DigitalHealthPassportChaincode struct {
 // Data to store
 // ===========================
 
-type holder struct {
+type Seeds struct {
+	NewHolders []Holder `json:"newHolders"`
+	Issuers    []Issuer `json:"issuers"`
+}
+
+
+type Holder struct {
 	ObjectType string `json:"docType"`
 	Id         string `json:"id"`    
 	PublicKey  string `json:"publicKey"`
 	TravelDoc  string `json:"travelDoc"`
 }
-/*
-type issuer struct {
+
+type Issuer struct {
 	ObjectType string `json:"docType"`
 	Id         string `json:"id"`
 	PublicKey  string `json:"publicKey"`
 }
-
+/*
 type digitalHealthPassport struct {
 	ObjectType   string   `json:"docType"`
 	HolderId     string   `json:"holderId"` 
@@ -76,8 +84,34 @@ func (t *DigitalHealthPassportChaincode) Invoke(stub shim.ChaincodeStubInterface
 // Transactions
 // ============================================================
 func (t *DigitalHealthPassportChaincode) initLedger(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	
 	fmt.Println("initLedger")
+
+	seedsFile, err := os.Open("seeds.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer seedsFile.Close()
+
+	byteSeeds, _ := ioutil.ReadAll(seedsFile)
+
+	var seeds Seeds
+	json.Unmarshal(byteSeeds, &seeds)
+	
+	for _, elem := range seeds.Issuers {
+		objectType := "issuer-doc"
+		issuer := &Issuer{objectType, elem.Id, elem.PublicKey}
+
+		issuerJsonBytes, err := json.Marshal(issuer)
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+
+		err = stub.PutState(issuer.id, issuerJsonBytes)
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+	}
+
 	return shim.Success(nil)
 }
 
@@ -119,8 +153,8 @@ func (t *DigitalHealthPassportChaincode) registerHolder(stub shim.ChaincodeStubI
 	}
 
 	// create holder object and marshal to json
-	objectType := "holder"
-	holder := &holder{objectType, holderId, holderPublicKey, travelDoc}
+	objectType := "holder-doc"
+	holder := &Holder{objectType, holderId, holderPublicKey, travelDoc}
 
 	holderJsonBytes, err := json.Marshal(holder)
 	if err != nil {
