@@ -106,7 +106,7 @@ func (t *DigitalHealthPassportChaincode) initLedger(stub shim.ChaincodeStubInter
 			return shim.Error(err.Error())
 		}
 
-		err = stub.PutState(issuer.id, issuerJsonBytes)
+		err = stub.PutState(issuer.Id, issuerJsonBytes)
 		if err != nil {
 			return shim.Error(err.Error())
 		}
