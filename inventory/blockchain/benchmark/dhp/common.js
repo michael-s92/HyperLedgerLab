@@ -32,7 +32,7 @@ function isDefined(t) {
         return true;
 }
 
-module.exports.info = 'Notarization';
+module.exports.info = 'DHP';
 
 let bc, contx;
 
@@ -52,7 +52,7 @@ module.exports.run = function () {
         let args = ALLTESTCASE[0].get();
 
 
-        let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);
+        let txstatus = bc.invokeSmartContract(contx, 'dhp', 'v1', args, 120);
         //console.info('TRANSACTION STATUS');
 
         txstatus.then(function (result) {
