@@ -129,7 +129,7 @@ func (t *DigitalHealthPassportChaincode) registerHolder(stub shim.ChaincodeStubI
 
 	// save holder to state
 	err = stub.PutState(holderId, holderJsonBytes)
-	if err != nill {
+	if err != nil {
 		return shim.Error(err.Error())
 	}
 	
