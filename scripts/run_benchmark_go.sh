@@ -27,7 +27,8 @@ then
 fi
 
 benchmark_dir=inventory/blockchain/benchmark/$chaincode
-#cd $benchmark_dir && npm install && node generator.js
+cd $benchmark_dir && npm install # && node generator.js
+
 
 cd ~/HyperLedgerLab
 script_dir=./scripts
