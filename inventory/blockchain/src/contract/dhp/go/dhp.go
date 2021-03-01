@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"encoding/json"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
@@ -15,14 +16,29 @@ type DigitalHealthPassportChaincode struct {
 // Data to store
 // ===========================
 
-//type marble struct {
-//	ObjectType string `json:"docType"` //docType is used to distinguish the various types of objects in state database
-//	Name       string `json:"name"`    //the fieldtags are needed to keep case from bouncing around
-//	Color      string `json:"color"`
-//	Size       int    `json:"size"`
-//	Owner      string `json:"owner"`
-//}
+type holder struct {
+	ObjectType string `json:"docType"`
+	Id         string `json:"id"`    
+	PublicKey  string `json:"publicKey"`
+	TravelDoc  string `json:"travelDoc"`
+}
+/*
+type issuer struct {
+	ObjectType string `json:"docType"`
+	Id         string `json:"id"`
+	PublicKey  string `json:"publicKey"`
+}
 
+type digitalHealthPassport struct {
+	ObjectType   string   `json:"docType"`
+	HolderId     string   `json:"holderId"` 
+	IssuerId     string   `json:"issuerId"`
+	Timestamp    string   `json:"timestamp"`
+	Test         string   `json:"testingMethod"`
+	Signature    string   `json:"signature"`
+	AccessRights []string `json:"accessRights"`
+}
+*/
 // ===========================
 // Init initializes chaincode
 // ===========================
@@ -42,8 +58,8 @@ func (t *DigitalHealthPassportChaincode) Invoke(stub shim.ChaincodeStubInterface
 		return t.initLedger(stub, args)
 	} else if function == "doNothing" {
 		return t.doNothing(stub, args)
-	} else if function == "registerUser" {
-		return t.registerUser(stub, args)
+	} else if function == "registerHolder" {
+		return t.registerHolder(stub, args)
 	} else if function == "issueDigitalHealthPassport" {
 		return t.issueDigitalHealthPassport(stub, args)
 	} else if function == "verifyDigitalHealthPassport" {
@@ -71,9 +87,52 @@ func (t *DigitalHealthPassportChaincode) doNothing(stub shim.ChaincodeStubInterf
 	return shim.Success(nil)
 }
 
-func (t *DigitalHealthPassportChaincode) registerUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+// Args: holderId, publicKey, travelDoc
+func (t *DigitalHealthPassportChaincode) registerHolder(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	fmt.Println("registerHolder")
+
+	if len(args) != 3 {
+		return shim.Error("Incorrect number of arguments. Expecting 3")
+	}
+
+	if len(args[0]) <= 0 {
+		return shim.Error("1st argument must be a non-empty string")
+	}
+	if len(args[1]) <= 0 {
+		return shim.Error("2nd argument must be a non-empty string")
+	}
+	if len(args[2]) <= 0 {
+		return shim.Error("3nd argument must be a non-empty string")
+	}
+
+	holderId := args[0]
+	holderPublicKey := args[1]
+	travelDoc := args[2]
+
+	// check if holder already exist
+	holderAsBytes, err := stub.GetState(holderId)
+	if err != nil {
+		return shim.Error("Failed to get holder: " + err.Error())
+	} else if holderAsBytes != nil {
+		ftm.Println("This holder already exists: " + holderId)
+		return shim.Error("This holder already exists: " + holderId)
+	}
+
+	// create holder object and marshal to json
+	objectType := "holder"
+	holder := &holder{objectType, holderId, holderPublicKey, travelDoc}
+
+	holderJsonBytes, err = json.Marshal(holder)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	// save holder to state
+	err = stub.PutState(holderId, holderJsonBytes)
+	if err != nill {
+		return shim.Error(err.Error())
+	}
 	
-	fmt.Println("registerUser")
 	return shim.Success(nil)
 }
 
