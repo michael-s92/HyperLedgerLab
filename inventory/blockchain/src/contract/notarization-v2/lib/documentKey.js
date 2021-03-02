@@ -5,7 +5,7 @@
  */
 
 const Key = "notarization-v2-next-state-document-id";
-const StartValue = 100000;
+const StartValue = 1000000;
 const Prefix = "document-id-"
 
 class DocumentKey {
@@ -26,7 +26,7 @@ class DocumentKey {
 
     static fromJSON(obj) {
         if (obj.nextId !== undefined) {
-            return new MyDocument(obj.nextId);
+            return new DocumentKey(obj.nextId);
         }
     }
 }

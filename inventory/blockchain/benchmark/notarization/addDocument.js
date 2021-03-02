@@ -17,7 +17,6 @@ class addDocument {
 
         let doc = seeds.benchmarkDocuments[randomAccessKey];
 
-
         // addDocument(ctx, documentHash, custodianId, custodianKey, studentId, studentKey)
 
 	    args = {

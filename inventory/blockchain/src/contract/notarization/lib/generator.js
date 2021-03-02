@@ -12,7 +12,7 @@ const parameters = read.sync('seedParameters.yaml');
 let allReader = [];
 let allCustodian = [];
 let allStudent = [];
-let initLedgerDocuments = [];
+let initDocuments = [];
 let benchmarkDocuments = [];
 
 function generateIdKeyPair(id_size, key_size){
@@ -89,20 +89,30 @@ while(i < parameters.allCustodian){
 }
 
 i = 0;
-while(i < parameters.allStudent){
+while(i < parameters.initDocuments){
     let pair = generateIdKeyPair(id_size, key_size);
     var index = allStudent.findIndex(x => x.id === pair.id);
     if(index === -1){
         allStudent.push(pair);
 
         let doc = generateDocument(pair, allCustodian, allReader);
+        initDocuments.push(doc);
 
-        if(Math.random() < 0.75){
-            initLedgerDocuments.push(doc);
-        } else {
-            benchmarkDocuments.push(doc);
-        }
+        i++;
+    } else {
+        console.log(`${pair.id} already exists`);
+    }
+}
 
+i = 0;
+while(i < parameters.newDocuments){
+    let pair = generateIdKeyPair(id_size, key_size);
+    var index = allStudent.findIndex(x => x.id === pair.id);
+    if(index === -1){
+        allStudent.push(pair);
+
+        let doc = generateDocument(pair, allCustodian, allReader);
+        benchmarkDocuments.push(doc);
 
         i++;
     } else {
@@ -114,7 +124,7 @@ const json = JSON.stringify({
     allReader: allReader,
     allCustodian: allCustodian,
     allStudent: allStudent,
-    initLedgerDocuments: initLedgerDocuments,
+    initDocuments: initDocuments,
     benchmarkDocuments: benchmarkDocuments
 }, null, 4);
 

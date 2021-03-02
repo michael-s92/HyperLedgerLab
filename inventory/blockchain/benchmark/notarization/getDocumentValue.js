@@ -10,23 +10,24 @@ class getDocumentValue {
 	    let args;
 
         /*
-            3 different scenario for this test
+            2 different scenario for this test
             1) get all data for arg random
-            2) get random document from initLedgerDocuments
-            3) get random document from benchmarkDocuments
+            2) get random document from initDocuments
         */
 
-        let scenario = utils.getRandomInt(3);
+        // select random reader
+        let randomAccessKey = 0;
+        do{
+            randomAccessKey = utils.getRandomInt(seeds.allReader.length);
+        } while(seeds.allReader[randomAccessKey] === undefined);
+
+        let reader = seeds.allReader[randomAccessKey];  
+
+
+        // lets set that just 0.5% of all cases can be an error with random data
+        let scenario = utils.getRandomInt(200);
 
         if(scenario === 0){
-
-            // select random reader
-            let randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allReader.length);
-            } while(seeds.allReader[randomAccessKey] === undefined);
-
-            let reader = seeds.allReader[randomAccessKey];      
 
             // select random student
             randomAccessKey = 0;
@@ -51,48 +52,15 @@ class getDocumentValue {
                     chaincodeArguments: [custodian.id, student.id, reader]
                 };
 
-        } else if (scenario == 1){
-
-            // select random reader
-            let randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allReader.length);
-            } while(seeds.allReader[randomAccessKey] === undefined);
-
-            let reader = seeds.allReader[randomAccessKey];    
-
-            // select random document from initLedgerDocuments
-            randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.initLedgerDocuments[randomAccessKey] === undefined);
-
-            let doc = seeds.initLedgerDocuments[randomAccessKey];
-
-            // getDocumentValue(ctx, custodianId, studentId, readerName)
-
-            args = {
-                    chaincodeFunction: 'getDocumentValue',
-                    chaincodeArguments: [doc.custodian.id, doc.student.id, reader]
-                };
-
         } else {
             
-            // select random reader
-            let randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allReader.length);
-            } while(seeds.allReader[randomAccessKey] === undefined);
-
-            let reader = seeds.allReader[randomAccessKey];    
-
-            // select random document from benchmarkDocuments
+            // select random document from initDocuments
             randomAccessKey = 0;
             do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.benchmarkDocuments[randomAccessKey] === undefined);
+                randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
+            } while(seeds.initDocuments[randomAccessKey] === undefined);
 
-            let doc = seeds.benchmarkDocuments[randomAccessKey];
+            let doc = seeds.initDocuments[randomAccessKey];
 
             // getDocumentValue(ctx, custodianId, studentId, readerName)
 

@@ -26,7 +26,7 @@ class NotarizationContract extends Contract {
 
         const status = 'valid';
 
-        for(const doc of seeds.initLedgerDocuments){
+        for(const doc of seeds.initDocuments){
             // create key for storing data
             let key = doc.custodian.id.toString() + doc.student.id.toString();
 

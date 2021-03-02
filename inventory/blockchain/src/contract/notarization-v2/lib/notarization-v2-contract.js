@@ -28,7 +28,9 @@ class NotarizationV2Contract extends Contract {
     async initLedger(ctx) {
         console.log('=========== START: initLedger Transaction');
 
-        for(const doc of seeds.initLedgerDocuments){
+        await ctx.stub.putState(DocumentKey.getKey(), Buffer.from(JSON.stringify(new DocumentKey())));
+
+        for(const doc of seeds.initDocuments){
             // create document object
             let custodianHash = sha512(doc.custodian.key);
             let studentHash = sha512(doc.student.key);
@@ -85,19 +87,18 @@ class NotarizationV2Contract extends Contract {
         // get state key
 
         let keyAsBytes = await ctx.stub.getState(DocumentKey.getKey());
-        let docKey;
-
         if(!keyAsBytes || !keyAsBytes.toString()) {
-            console.log("No entity saved till now");
-            docKey = new DocumentKey();
-        } else {
-            try{
-                let json = JSON.parse(keyAsBytes.toString());
-                docKey = DocumentKey.fromJSON(json);
-            } catch(err){
-                throw new Error(`Failed to decode JSON for DocumentKey: ` + err.description);
-            }
+            throw new Error(`Failed to retrive DocumentKey: ${err.description}`);
+        } 
+
+        let docKey;
+        try{
+            let json = JSON.parse(keyAsBytes.toString());
+            docKey = DocumentKey.fromJSON(json);
+        } catch(err){
+            throw new Error(`Failed to decode JSON for DocumentKey: ${err}`);
         }
+        
 
         let newDocKey = docKey.getAndIncrementId();
         await ctx.stub.putState(DocumentKey.getKey(), Buffer.from(JSON.stringify(docKey)));

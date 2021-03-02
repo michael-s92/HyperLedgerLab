@@ -10,14 +10,14 @@ class getAllDocumentReaders {
 	    let args;
 
         /*
-            3 different scenario for this test
+            2 different scenario for this test
             1) get all data for arg random
-            2) get random document from initLedgerDocuments
-            3) get random document from benchmarkDocuments
+            2) get random document from initDocuments
         */
 
-        let scenario = utils.getRandomInt(3);
+        let scenario = utils.getRandomInt(200);
 
+        // probability 0.5% to chose all random data
         if(scenario === 0){
 
             // select random student
@@ -43,32 +43,15 @@ class getAllDocumentReaders {
                     chaincodeArguments: [docId, student.key]
                 };
 
-        } else if (scenario == 1){
-
-            // select random document from initLedgerDocuments
-            let randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.initLedgerDocuments[randomAccessKey] === undefined);
-
-            let doc = seeds.initLedgerDocuments[randomAccessKey];
-
-            // getAllDocumentReaders(ctx, documentKey, studentKey)
-
-            args = {
-                    chaincodeFunction: 'getAllDocumentReaders',
-                    chaincodeArguments: [doc.documentId, doc.student.key]
-                };
-
         } else {
-            
-            // select random document from benchmarkDocuments
+
+            // select random document from initDocuments
             let randomAccessKey = 0;
             do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.benchmarkDocuments[randomAccessKey] === undefined);
+                randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
+            } while(seeds.initDocuments[randomAccessKey] === undefined);
 
-            let doc = seeds.benchmarkDocuments[randomAccessKey];
+            let doc = seeds.initDocuments[randomAccessKey];
 
             // getAllDocumentReaders(ctx, documentKey, studentKey)
 
