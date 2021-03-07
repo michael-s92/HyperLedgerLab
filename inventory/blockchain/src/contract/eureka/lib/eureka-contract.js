@@ -206,8 +206,8 @@ class EurekaContract extends Contract {
         let authorTitleIndexKey = await ctx.stub.createCompositeKey(authorTitleIndexName, [authorId, title]);
 
         let articleExists = await ctx.stub.getState(authorTitleIndexKey);
-        if(Helper.objExists(articleExists)){
-            throw new Error(`Article with title ${article.title} from author ${article.author.id} already exists`);
+        if(!Helper.objExists(articleExists)){
+            throw new Error(`Article with title ${title} from author ${authorId} doesnt exist`);
         }
 
         //check if reviewing is already in process
@@ -215,7 +215,7 @@ class EurekaContract extends Contract {
         let reviewingExists = await ctx.stub.getState(authorTitleReviewingIndexKey);
 
         if(Helper.objExists(reviewingExists)){
-            throw new Error(`Reviewing for Article with title ${article.title} from author ${article.author.id} already exists`);
+            throw new Error(`Reviewing for Article with title ${title} from author ${authorId} already exists`);
         }
 
         //check all reviewers
