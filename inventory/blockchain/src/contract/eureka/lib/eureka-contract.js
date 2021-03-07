@@ -51,7 +51,18 @@ class EurekaContract extends Contract {
             await ctx.stub.putState(reviewer.id, Buffer.from(JSON.stringify(objReviewer)));
         }
 
-        //TODO: submit some articles
+        //submit init articles
+        for (const article of seeds.initArticle) {
+
+            let hashedKey = sha512(article.author.key);
+            let objAuthor = new Author(article.author.id, article.author.name, hashedKey);
+
+            let objArticle = new Article(article.title, objAuthor, article.coauthor_ids, article.refauthor_ids, article.fee, article.lref);
+
+            let authorTitleIndexKey = await ctx.stub.createCompositeKey(authorTitleIndexName, [article.author.id, article.title]);
+            await ctx.stub.putState(authorTitleIndexKey, Buffer.from(JSON.stringify(objArticle)));
+        }
+
         //TODO: start process of reviewing
         //TODO: submit some reviews
     }
