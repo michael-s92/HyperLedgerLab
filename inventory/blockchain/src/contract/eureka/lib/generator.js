@@ -54,7 +54,7 @@ function generateArticle(index, flag) {
     let author = authors[Utils.getRandomInt(authors.length)];
     let coauthor_ids = takeRandomFromList(authors, parameters.max_coauthors, author);
     let refauthor_ids = takeRandomFromList(authors, parameters.max_ref_authors, author);
-    let fee = Utils.getRandomInt(1000);
+    let fee = Utils.getRandomInt(1000).toString();
     let lref = Utils.generateRandomString(512);
 
     return {
@@ -84,7 +84,7 @@ function generateDefaultReview(index){
 
     let mark = Utils.getRandomInt(10);
     let comment = Utils.getRandomSentence(5);
-    
+
     return{
         mark: mark,
         comment: comment
