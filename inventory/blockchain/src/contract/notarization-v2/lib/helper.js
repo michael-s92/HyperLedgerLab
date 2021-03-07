@@ -24,9 +24,9 @@ class Helper {
             if(res.value && res.value.value.toString()){
                 try{
                     let json = JSON.parse(res.value.value.toString('utf8'));
-                    if(json.docType === MyDocument.getDocType){
+                    if(json.docType === MyDocument.getDocType()){
                         allResults.push(new MyDocument(json));
-                    } else if(json.docType === Reader.getDocType){
+                    } else if(json.docType === Reader.getDocType()){
                         allResults.push(new Reader(json));
                     } else {
                         allResults.push(json);
@@ -48,7 +48,7 @@ class Helper {
     static async throwErrorIfStateExists(iterator, message){
         let res = await Helper.getAllResults(iterator);
 
-        if(res.length > 1){
+        if(res.length > 0){
             throw new Error(message);
         }
     }
