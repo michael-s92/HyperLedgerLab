@@ -56,4 +56,4 @@ class Reviewer extends User{
     }
 }
 
-module.exports = [User, Author, Editor, Reviewer];
+module.exports = { Author, Editor, Reviewer };
