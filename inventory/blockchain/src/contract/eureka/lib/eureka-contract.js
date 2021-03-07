@@ -120,14 +120,14 @@ class EurekaContract extends Contract {
             return;
         }
         //check coauthors
-        for (const coauthorId in coauthor_ids) {
+        for (const coauthorId of coauthor_ids) {
             let coauthorAsByte = await ctx.stub.getState(coauthorId);
             if(!coauthorAsByte || !coauthorAsByte.toString()){
                 throw new Error(`CoAuthor ${coauthorId} doesnt exist`);
             }
         }
         //check ref_authors
-        for (const refauthorId in ref_author_ids) {
+        for (const refauthorId of ref_author_ids) {
             let refauthorAsByte = await ctx.stub.getState(refauthorId);
             if(!refauthorAsByte || !refauthorAsByte.toString()){
                 throw new Error(`Reference Author ${refauthorId} doesnt exist`);
@@ -206,7 +206,7 @@ class EurekaContract extends Contract {
         }
 
         //check all reviewers
-        for (const reviewerId in reviewerIds) {
+        for (const reviewerId of reviewerIds) {
             let reviewerAsByte = await ctx.stub.getState(reviewerId);
             if(!reviewerAsByte || !reviewerAsByte.toString()){
                 throw new Error(`Reviewer ${reviewerId} doesnt exist`);
