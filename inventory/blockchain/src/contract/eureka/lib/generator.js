@@ -23,7 +23,7 @@ const reviewerUserType = 'R';
 const editorUserType = 'E';
 function generateUser(type, index) {
 
-    let id = type + Utils.generateRandomString(parameters.id_length) + index;
+    let id = type + Utils.generateRandomWord(parameters.id_length) + index;
     let key = Utils.generateRandomString(parameters.key_length);
     let name = type + ": " + parameters.names[Utils.getRandomInt(parameters.names.length)];
 
