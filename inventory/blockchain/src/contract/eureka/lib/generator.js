@@ -52,8 +52,8 @@ function generateArticle(index, flag) {
 
     let title = flag + index + " " + Utils.generateRandomWord(10);
     let author = authors[Utils.getRandomInt(authors.length)];
-    let coauthor_ids = takeRandomFromList(authors, parameters.max_coauthors, author);
-    let refauthor_ids = takeRandomFromList(authors, parameters.max_ref_authors, author);
+    let coauthor_ids = takeRandomFromList(authors, parameters.max_coauthors, author).map(e => e.id);
+    let refauthor_ids = takeRandomFromList(authors, parameters.max_ref_authors, author).map(e => e.id);
     let fee = Utils.getRandomInt(1000).toString();
     let lref = Utils.generateRandomString(512);
 
