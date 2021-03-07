@@ -89,6 +89,12 @@ class EurekaContract extends Contract {
         if(author_id.length <= 0){
             throw new Error("author must be non-empty string");
         }
+        if(coauthor_ids.length <= 0){
+            throw new Error("coauthor_ids must be non-empty string");
+        }
+        if(ref_author_ids.length <= 0){
+            throw new Error("ref_author_ids must be non-empty string");
+        }
         if(fee.length <= 0){
             throw new Error("fee must be non-empty string");
         } else if(isNaN(fee)){
@@ -121,15 +127,17 @@ class EurekaContract extends Contract {
         }
 
         //check coauthors
-        for (const coauthorId of coauthor_ids) {
+        let coAuthorsIds = JSON.parse(coauthor_ids);
+        for (const coauthorId of coAuthorsIds) {
             let coauthorAsByte = await ctx.stub.getState(coauthorId);
             if(!coauthorAsByte || !coauthorAsByte.toString()){
                 throw new Error(`CoAuthor ${coauthorId} doesnt exist`);
             }
         }
-        
+
         //check ref_authors
-        for (const refauthorId of ref_author_ids) {
+        let refAuthorIds = JSON.parse(ref_author_ids);
+        for (const refauthorId of refAuthorIds) {
             let refauthorAsByte = await ctx.stub.getState(refauthorId);
             if(!refauthorAsByte || !refauthorAsByte.toString()){
                 throw new Error(`Reference Author ${refauthorId} doesnt exist`);
