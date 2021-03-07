@@ -164,7 +164,7 @@ class EurekaContract extends Contract {
         ctx.stub.setEvent('article_submitted_event', Buffer.from(JSON.stringify(payload)));
     }
 
-    async startReviewingOfArticle(ctx, editorId, editorKey, title, authorId, reviewerIds){
+    async startReviewingOfArticle(ctx, editorId, editorKey, title, authorId, reviewer_ids){
 
         if(editorId.length <= 0){
             throw new Error("editorId must be non-empty string");
@@ -177,6 +177,9 @@ class EurekaContract extends Contract {
         }
         if(authorId.length <= 0){
             throw new Error("authorId must be non-empty string");
+        }
+        if(reviewer_ids.length <= 0){
+            throw new Error("reviewer_ids must be non-empty string");
         }
 
         //check if editor is ok - editorKey
@@ -216,6 +219,7 @@ class EurekaContract extends Contract {
         }
 
         //check all reviewers
+        let reviewerIds = JSON.parse(reviewer_ids);
         for (const reviewerId of reviewerIds) {
             let reviewerAsByte = await ctx.stub.getState(reviewerId);
             if(!reviewerAsByte || !reviewerAsByte.toString()){

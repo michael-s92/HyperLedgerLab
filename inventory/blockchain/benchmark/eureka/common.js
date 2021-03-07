@@ -1,12 +1,14 @@
 'use strict';
 
 const submittingArticle = require('./submittingArticle');
+const startReviewingOfArticle = require('./startReviewingOfArticle');
 
 const pick = require('pick-random-weighted');
 var deck = require('deck');
 
 const ALLTESTCASE = [
-    submittingArticle
+    submittingArticle,
+    startReviewingOfArticle
 ];
 
 // PROVIDE NUMBER OF TESTCASES
@@ -47,7 +49,7 @@ module.exports.run = function () {
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
     //!!!!! let args = ALLTESTCASE[testPick].get();
-    let args = ALLTESTCASE[0].get();
+    let args = ALLTESTCASE[1].get();
 
     let txstatus = bc.invokeSmartContract(contx, 'eureka', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');
