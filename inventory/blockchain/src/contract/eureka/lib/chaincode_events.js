@@ -38,4 +38,4 @@ class ReviewDoneEvent extends ChaincodeEvent{
 
 }
 
-module.exports = [ArticleSubmittedEvent, DoReviewEvent, ReviewDoneEvent];
+module.exports = { ArticleSubmittedEvent, DoReviewEvent, ReviewDoneEvent };
