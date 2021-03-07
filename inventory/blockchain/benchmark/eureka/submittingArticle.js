@@ -22,7 +22,7 @@ class submittingArticle {
         // submittingArticle(ctx, title, author_id, coauthor_ids, ref_author_ids, fee, lref, authorKey)
 	    args = {
                 chaincodeFunction: 'submittingArticle',
-                chaincodeArguments: [article.title, article.author.id, article.coauthor_ids, article.refauthor_ids, article.fee, article.lref, article.author.key]
+                chaincodeArguments: [article.title, article.author.id, JSON.stringify(article.coauthor_ids), JSON.stringify(article.refauthor_ids), article.fee, article.lref, article.author.key]
             };
 
 	    return args;
