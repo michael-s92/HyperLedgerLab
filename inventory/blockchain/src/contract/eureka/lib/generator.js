@@ -16,7 +16,7 @@ let editors = [];
 let initArticle = [];
 let openReviewingProcess = [];
 let newArticles = [];
-let newReviews = [];
+let defaultReview = [];
 
 const authorUserType = 'A';
 const reviewerUserType = 'R';
@@ -80,6 +80,17 @@ function generateReviewingProcess(index, article) {
     };
 }
 
+function generateDefaultReview(index){
+
+    let mark = Utils.getRandomInt(10);
+    let comment = Utils.getRandomSentence(5);
+    
+    return{
+        mark: mark,
+        comment: comment
+    };
+}
+
 for (let i = 0; i < parameters.authors; i++) {
     authors.push(generateUser(authorUserType, i));
 }
@@ -108,13 +119,18 @@ for (let i = 0; i < parameters.init_open_reviewings; i++) {
     openReviewingProcess.push(generateReviewingProcess(i, articleForProcess));
 }
 
+for (let i = 0; i < parameters.default_reviews; i++) {
+    defaultReview.push(generateDefaultReview(i));
+}
+
 const json = JSON.stringify({
     authors: authors,
     reviewers: reviewers,
     editors: editors,
     initArticle: initArticle,
     openReviewingProcess: openReviewingProcess,
-    newArticles: newArticles
+    newArticles: newArticles,
+    defaultReview: defaultReview
 }, null, 4);
 
 fs.writeFile('seeds.json', json, function (err) {

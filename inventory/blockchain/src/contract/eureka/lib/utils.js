@@ -27,6 +27,15 @@ class Utils {
         return shuffled.slice(min);
     }
     
+    static getRandomSentence(words){
+        let sentence = "";
+
+        for(let i = 0; i < words; i++){
+            let len = this.getRandomInt(50);
+            sentence += this.generateRandomWord(len) + " ";
+        }
+        return sentence;
+    }
 }
 
 module.exports = Utils;
