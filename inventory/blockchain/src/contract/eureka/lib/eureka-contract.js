@@ -31,7 +31,7 @@ class EurekaContract extends Contract {
         console.info("InitLedger Transaction Invoked");
 
         //TODO: init authors
-        for (const author in seeds.authors) {
+        for (const author of seeds.authors) {
             let hashedKey = sha512(author.key);
             let objAuthor = new Author(author.id, author.name, hashedKey);
             await ctx.stub.putState(author.id, Buffer.from(JSON.stringify(objAuthor)));
