@@ -4,9 +4,12 @@ editors: 10
 id_length: 20
 key_length: 50
 init_articles: 100
+init_open_reviewings: 5
+new_articles: 1000
 
 max_coauthors: 4
 max_ref_authors: 10
+max_reviewers: 10
 
 names:
   - "Arthur"

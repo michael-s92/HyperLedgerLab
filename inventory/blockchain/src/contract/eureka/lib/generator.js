@@ -5,6 +5,7 @@ const read = require('read-yaml');
 const RandExp = require('randexp');
 
 const Utils = require('./utils');
+const { title } = require('process');
 
 
 const parameters = read.sync('seedParameters.yaml');
@@ -13,15 +14,14 @@ let authors = [];
 let reviewers = [];
 let editors = [];
 let initArticle = [];
+let openReviewingProcess = [];
 let newArticles = [];
-let initReviewingProcess = [];
-let initReviews = [];
 let newReviews = [];
 
 const authorUserType = 'A';
 const reviewerUserType = 'R';
 const editorUserType = 'E';
-function generateUser(type, index){
+function generateUser(type, index) {
 
     let id = type + Utils.generateRandomString(parameters.id_length) + index;
     let key = Utils.generateRandomString(parameters.key_length);
@@ -34,19 +34,21 @@ function generateUser(type, index){
     };
 }
 
-function takeRandomFromList(list, number, rootElement){
-    let take = Utils.getRandomInt(number);
+function takeRandomFromList(list, number, rootElement) {
+    let take = Utils.getRandomInt(number - 1) + 1;
 
     let returnList = [...list];
-    const ind = returnList.indexOf(rootElement);
-    if(ind > -1){
-        returnList.splice(ind, 1);
+    if (rootElement !== undefined) {
+        const ind = returnList.indexOf(rootElement);
+        if (ind > -1) {
+            returnList.splice(ind, 1);
+        }
     }
 
     return Utils.getRandomSubarray(returnList, take);
 }
 
-function generateArticle(index, flag){
+function generateArticle(index, flag) {
 
     let title = flag + index + " " + Utils.generateRandomWord(10);
     let author = authors[Utils.getRandomInt(authors.length)];
@@ -62,33 +64,60 @@ function generateArticle(index, flag){
         refauthor_ids: refauthor_ids,
         fee: fee,
         lref: lref
-    }
+    };
 }
 
-for (let i = 0; i < parameters.authors; i++){
+function generateReviewingProcess(index, article) {
+   
+    let editor = editors[Utils.getRandomInt(editors.length)];
+    let reviewersSample = takeRandomFromList(reviewers, parameters.max_reviewers);
+
+    return {
+        title: article.title,
+        author_id: article.author.id,
+        editor: editor,
+        reviewers: reviewersSample
+    };
+}
+
+for (let i = 0; i < parameters.authors; i++) {
     authors.push(generateUser(authorUserType, i));
 }
 
-for (let i = 0; i < parameters.reviewers; i++){
+for (let i = 0; i < parameters.reviewers; i++) {
     reviewers.push(generateUser(reviewerUserType, i));
 }
 
-for (let i = 0; i < parameters.editors; i++){
+for (let i = 0; i < parameters.editors; i++) {
     editors.push(generateUser(editorUserType, i));
 }
 
-for (let i = 0; i < parameters.init_articles; i++){
+for (let i = 0; i < parameters.init_articles; i++) {
     initArticle.push(generateArticle(i, "I"));
+}
+
+for (let i = 0; i < parameters.new_articles; i++) {
+    newArticles.push(generateArticle(i, "B"));
+}
+
+for (let i = 0; i < parameters.init_open_reviewings; i++) {
+
+    let articleForProcess = generateArticle(i, "R");
+    initArticle.push(articleForProcess);
+
+    openReviewingProcess.push(generateReviewingProcess(i, articleForProcess));
 }
 
 const json = JSON.stringify({
     authors: authors,
     reviewers: reviewers,
     editors: editors,
-    initArticle: initArticle
+    initArticle: initArticle,
+    openReviewingProcess: openReviewingProcess,
+    newArticles: newArticles
 }, null, 4);
 
-fs.writeFile('seeds.json', json, function(err) {
+fs.writeFile('seeds.json', json, function (err) {
     if (err) {
         console.log(err);
     }
