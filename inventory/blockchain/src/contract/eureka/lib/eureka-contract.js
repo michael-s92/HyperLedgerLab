@@ -102,7 +102,7 @@ class EurekaContract extends Contract {
         }
 
         // check author
-        let authorAsBytes = ctx.stub.getState(author_id);
+        let authorAsBytes = await ctx.stub.getState(author_id);
         if(!authorAsBytes || !authorAsBytes.toString()){
             throw new Error(`Author ${author_id} doesnt exist`);
         }
@@ -121,14 +121,14 @@ class EurekaContract extends Contract {
         }
         //check coauthors
         for (const coauthorId in coauthor_ids) {
-            let coauthorAsByte = ctx.stub.getState(coauthorId);
+            let coauthorAsByte = await ctx.stub.getState(coauthorId);
             if(!coauthorAsByte || !coauthorAsByte.toString()){
                 throw new Error(`CoAuthor ${coauthorId} doesnt exist`);
             }
         }
         //check ref_authors
         for (const refauthorId in ref_author_ids) {
-            let refauthorAsByte = ctx.stub.getState(refauthorId);
+            let refauthorAsByte = await ctx.stub.getState(refauthorId);
             if(!refauthorAsByte || !refauthorAsByte.toString()){
                 throw new Error(`Reference Author ${refauthorId} doesnt exist`);
             }
@@ -170,7 +170,7 @@ class EurekaContract extends Contract {
         }
 
         //check if editor is ok - editorKey
-        let editorAsBytes = ctx.stub.getState(editorId);
+        let editorAsBytes = await ctx.stub.getState(editorId);
         if(!editorAsBytes || !editorAsBytes.toString()){
             throw new Error(`Editor ${editorId} doesnt exist`);
         }
@@ -207,7 +207,7 @@ class EurekaContract extends Contract {
 
         //check all reviewers
         for (const reviewerId in reviewerIds) {
-            let reviewerAsByte = ctx.stub.getState(reviewerId);
+            let reviewerAsByte = await ctx.stub.getState(reviewerId);
             if(!reviewerAsByte || !reviewerAsByte.toString()){
                 throw new Error(`Reviewer ${reviewerId} doesnt exist`);
             }
@@ -247,7 +247,7 @@ class EurekaContract extends Contract {
         }
 
         //check reviewer with key
-        let reviewerAsBytes = ctx.stub.getState(reviewerId);
+        let reviewerAsBytes = await ctx.stub.getState(reviewerId);
         if(!Helper.objExists(reviewerAsBytes)){
             throw new Error(`Reviewer ${reviewerId} doesnt exist`);
         }
@@ -334,7 +334,7 @@ class EurekaContract extends Contract {
         }
 
         //check editor - editorKey
-        let editorAsBytes = ctx.stub.getState(editorId);
+        let editorAsBytes = await ctx.stub.getState(editorId);
         if(!editorAsBytes || !editorAsBytes.toString()){
             throw new Error(`Editor ${editorId} doesnt exist`);
         }
