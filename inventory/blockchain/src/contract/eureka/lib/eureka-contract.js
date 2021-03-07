@@ -103,7 +103,7 @@ class EurekaContract extends Contract {
 
         // check author
         let authorAsBytes = await ctx.stub.getState(author_id);
-        if(!authorAsBytes || !authorAsBytes.toString()){
+        if(!Helper.objExists(authorAsBytes)){
             throw new Error(`Author ${author_id} doesnt exist`);
         }
         let authorjson = {};
@@ -119,6 +119,7 @@ class EurekaContract extends Contract {
             console.log(`Invalid author key for Author ${author_id}`);
             return;
         }
+
         //check coauthors
         for (const coauthorId of coauthor_ids) {
             let coauthorAsByte = await ctx.stub.getState(coauthorId);
@@ -126,6 +127,7 @@ class EurekaContract extends Contract {
                 throw new Error(`CoAuthor ${coauthorId} doesnt exist`);
             }
         }
+        
         //check ref_authors
         for (const refauthorId of ref_author_ids) {
             let refauthorAsByte = await ctx.stub.getState(refauthorId);
