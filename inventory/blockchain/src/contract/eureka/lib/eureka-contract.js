@@ -30,14 +30,26 @@ class EurekaContract extends Contract {
     async initLedger(ctx) {
         console.info("InitLedger Transaction Invoked");
 
-        //TODO: init authors
+        //init authors
         for (const author of seeds.authors) {
             let hashedKey = sha512(author.key);
             let objAuthor = new Author(author.id, author.name, hashedKey);
             await ctx.stub.putState(author.id, Buffer.from(JSON.stringify(objAuthor)));
         }
-        //TODO: init editors
-        //TODO: init reviewers
+
+        //init editors
+        for (const editor of seeds.editors) {
+            let hashedKey = sha512(editor.key);
+            let objEditor = new Editor(editor.id, editor.name, hashedKey);
+            await ctx.stub.putState(editor.id, Buffer.from(JSON.stringify(objEditor)));
+        }
+
+        //init reviewers
+        for (const reviewer of seeds.reviewers) {
+            let hashedKey = sha512(reviewer.key);
+            let objReviewer = new Reviewer(reviewer.id, reviewer.name, hashedKey);
+            await ctx.stub.putState(reviewer.id, Buffer.from(JSON.stringify(objReviewer)));
+        }
 
         //TODO: submit some articles
         //TODO: start process of reviewing
