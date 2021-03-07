@@ -3,6 +3,10 @@ reviewers: 20
 editors: 10
 id_length: 20
 key_length: 50
+init_articles: 100
+
+max_coauthors: 4
+max_ref_authors: 10
 
 names:
   - "Arthur"
@@ -14,3 +18,4 @@ names:
   - "Peter Pan"
   - "Daenerys"
   - "Hades"
+  - "Romeo"
