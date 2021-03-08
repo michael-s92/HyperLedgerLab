@@ -26,7 +26,7 @@ let testCasePermuation = [
 const testCasePermuationWeighted = [
         [ 0, 50 ],
         [ 1, 50 ],
-        [ 2, 200 ],
+        [ 2, 250 ],
         [ 3, 20 ]
 ];
 
@@ -48,12 +48,11 @@ module.exports.init = function (blockchain, context, args) {
 };
 module.exports.run = function () {
 
-    //!!!!! const testPick = pick(testCasePermuationWeighted);
+    const testPick = pick(testCasePermuationWeighted);
     //let uniformPick = deck.pick(testCasePermuation);
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
-    //!!!!! let args = ALLTESTCASE[testPick].get();
-    let args = ALLTESTCASE[2].get();
+    let args = ALLTESTCASE[testPick].get();
 
     let txstatus = bc.invokeSmartContract(contx, 'eureka', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');

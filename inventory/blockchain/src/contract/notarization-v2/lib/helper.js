@@ -24,9 +24,15 @@ class Helper {
             if(res.value && res.value.value.toString()){
                 try{
                     let json = JSON.parse(res.value.value.toString('utf8'));
+<<<<<<< HEAD
                     if(json.docType === MyDocument.getDocType()){
                         allResults.push(MyDocument.fromJSON(json));
                     } else if(json.docType === Reader.getDocType()){
+=======
+                    if(json.docType === MyDocument.getDocType){
+                        allResults.push(MyDocument.fromJSON(json));
+                    } else if(json.docType === Reader.getDocType){
+>>>>>>> enable all tests
                         allResults.push(Reader.fromJSON(json));
                     } else {
                         allResults.push(json);
