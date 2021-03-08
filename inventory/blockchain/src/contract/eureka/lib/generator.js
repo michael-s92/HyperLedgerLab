@@ -82,7 +82,7 @@ function generateReviewingProcess(index, article) {
 
 function generateDefaultReview(index){
 
-    let mark = Utils.getRandomInt(10);
+    let mark = Utils.getRandomInt(10).toString();
     let comment = Utils.getRandomSentence(5);
 
     return{
