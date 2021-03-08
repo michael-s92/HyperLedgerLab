@@ -275,8 +275,8 @@ class EurekaContract extends Contract {
         let reviewer = Reviewer.fromJSON(reviewerJson);
 
         let hashedKey = sha512(reviewerKey);
-        if(hashedKey !== editor.hashedKey){
-            console.log(`Invalid reviewer key for editor ${reviewerId}`);
+        if(hashedKey !== reviewer.hashedKey){
+            console.log(`Invalid reviewer key for reviewerId ${reviewerId}`);
             return;
         }
 
