@@ -2,13 +2,17 @@
 
 const submittingArticle = require('./submittingArticle');
 const startReviewingOfArticle = require('./startReviewingOfArticle');
+const reviewArticle = require('./reviewArticle');
+const closeReviewingOfArticle = require('./closeReviewingOfArticle');
 
 const pick = require('pick-random-weighted');
 var deck = require('deck');
 
 const ALLTESTCASE = [
     submittingArticle,
-    startReviewingOfArticle
+    startReviewingOfArticle,
+    reviewArticle,
+    closeReviewingOfArticle
 ];
 
 // PROVIDE NUMBER OF TESTCASES
@@ -20,10 +24,10 @@ let testCasePermuation = [
 ];
 
 const testCasePermuationWeighted = [
-        [ 0, 20 ],
-        [ 1, 100 ],
-        [ 2, 10 ],
-        [ 3, 40 ]
+        [ 0, 50 ],
+        [ 1, 50 ],
+        [ 2, 200 ],
+        [ 3, 20 ]
 ];
 
 function isDefined(t) {
@@ -49,7 +53,7 @@ module.exports.run = function () {
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[uniformPick]);
 
     //!!!!! let args = ALLTESTCASE[testPick].get();
-    let args = ALLTESTCASE[1].get();
+    let args = ALLTESTCASE[2].get();
 
     let txstatus = bc.invokeSmartContract(contx, 'eureka', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');
