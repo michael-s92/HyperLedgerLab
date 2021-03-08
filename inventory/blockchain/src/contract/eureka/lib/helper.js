@@ -24,7 +24,7 @@ class Helper {
                 try{
                     let json = JSON.parse(res.value.value.toString('utf8'));
                     if(json.docType === ReviewingProcess.getDocType()){
-                        allResults.push(new ReviewingProcess(json));
+                        allResults.push(ReviewingProcess.fromJSON(json));
                     } else {
                         allResults.push(json);
                     }
