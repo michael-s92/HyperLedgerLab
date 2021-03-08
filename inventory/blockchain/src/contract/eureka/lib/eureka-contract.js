@@ -68,60 +68,60 @@ class EurekaContract extends Contract {
 
             let reviews = [];
             let reviewers_id = reviewing.reviewers.map(e => e.id);
-        
+
             let hashedKey = sha512(reviewing.editor.key);
             let editor = new Editor(reviewing.editor.id, reviewing.editor.name, hashedKey);
 
             let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [reviewing.author_id, reviewing.title, "reviewing"]);
-    
+
             let reviewingObj = new ReviewingProcess(reviewing.author_id, reviewing.title, editor, reviewers_id, reviews, false, 0);
             await ctx.stub.putState(authorTitleReviewingIndexKey, Buffer.from(JSON.stringify(reviewingObj)));
         }
     }
 
-    async submittingArticle(ctx, title, author_id, coauthor_ids, ref_author_ids, fee, lref, authorKey){
+    async submittingArticle(ctx, title, author_id, coauthor_ids, ref_author_ids, fee, lref, authorKey) {
         console.info("Submitting Article Transaction Invoked");
 
         // check all inputs
-        if(title.length <= 0){
+        if (title.length <= 0) {
             throw new Error("title must be non-empty string");
         }
-        if(author_id.length <= 0){
+        if (author_id.length <= 0) {
             throw new Error("author must be non-empty string");
         }
-        if(coauthor_ids.length <= 0){
+        if (coauthor_ids.length <= 0) {
             throw new Error("coauthor_ids must be non-empty string");
         }
-        if(ref_author_ids.length <= 0){
+        if (ref_author_ids.length <= 0) {
             throw new Error("ref_author_ids must be non-empty string");
         }
-        if(fee.length <= 0){
+        if (fee.length <= 0) {
             throw new Error("fee must be non-empty string");
-        } else if(isNaN(fee)){
+        } else if (isNaN(fee)) {
             throw new Error("fee must be a numeric string");
         }
-        if(lref.length <= 0){
+        if (lref.length <= 0) {
             throw new Error("lref must be non-empty string");
         }
-        if(authorKey.length <= 0){
+        if (authorKey.length <= 0) {
             throw new Error("authorKey must be non-empty string");
         }
 
         // check author
         let authorAsBytes = await ctx.stub.getState(author_id);
-        if(!Helper.objExists(authorAsBytes)){
+        if (!Helper.objExists(authorAsBytes)) {
             throw new Error(`Author ${author_id} doesnt exist`);
         }
         let authorjson = {};
         try {
             authorjson = JSON.parse(authorAsBytes.toString());
-        } catch (err){
+        } catch (err) {
             throw new Error(`Failed to parse Author ${author_id}, err: ${err}`);
         }
         let author = Author.fromJSON(authorjson);
 
         let hashedKey = sha512(authorKey);
-        if(hashedKey !== author.hashedKey){
+        if (hashedKey !== author.hashedKey) {
             console.log(`Invalid author key for Author ${author_id}`);
             return;
         }
@@ -130,7 +130,7 @@ class EurekaContract extends Contract {
         let coAuthorsIds = JSON.parse(coauthor_ids);
         for (const coauthorId of coAuthorsIds) {
             let coauthorAsByte = await ctx.stub.getState(coauthorId);
-            if(!coauthorAsByte || !coauthorAsByte.toString()){
+            if (!coauthorAsByte || !coauthorAsByte.toString()) {
                 throw new Error(`CoAuthor ${coauthorId} doesnt exist`);
             }
         }
@@ -139,7 +139,7 @@ class EurekaContract extends Contract {
         let refAuthorIds = JSON.parse(ref_author_ids);
         for (const refauthorId of refAuthorIds) {
             let refauthorAsByte = await ctx.stub.getState(refauthorId);
-            if(!refauthorAsByte || !refauthorAsByte.toString()){
+            if (!refauthorAsByte || !refauthorAsByte.toString()) {
                 throw new Error(`Reference Author ${refauthorId} doesnt exist`);
             }
         }
@@ -152,7 +152,7 @@ class EurekaContract extends Contract {
 
         //check if article exists
         let articleExists = await ctx.stub.getState(authorTitleIndexKey);
-        if(Helper.objExists(articleExists)){
+        if (Helper.objExists(articleExists)) {
             throw new Error(`Article with title ${article.title} from author ${article.author.id} already exists`);
         }
 
@@ -164,40 +164,40 @@ class EurekaContract extends Contract {
         ctx.stub.setEvent('article_submitted_event', Buffer.from(JSON.stringify(payload)));
     }
 
-    async startReviewingOfArticle(ctx, editorId, editorKey, title, authorId, reviewer_ids){
+    async startReviewingOfArticle(ctx, editorId, editorKey, title, authorId, reviewer_ids) {
 
-        if(editorId.length <= 0){
+        if (editorId.length <= 0) {
             throw new Error("editorId must be non-empty string");
         }
-        if(editorKey.length <= 0){
+        if (editorKey.length <= 0) {
             throw new Error("editorKey must be non-empty string");
         }
-        if(title.length <= 0){
+        if (title.length <= 0) {
             throw new Error("title must be non-empty string");
         }
-        if(authorId.length <= 0){
+        if (authorId.length <= 0) {
             throw new Error("authorId must be non-empty string");
         }
-        if(reviewer_ids.length <= 0){
+        if (reviewer_ids.length <= 0) {
             throw new Error("reviewer_ids must be non-empty string");
         }
 
         //check if editor is ok - editorKey
         let editorAsBytes = await ctx.stub.getState(editorId);
-        if(!editorAsBytes || !editorAsBytes.toString()){
+        if (!editorAsBytes || !editorAsBytes.toString()) {
             throw new Error(`Editor ${editorId} doesnt exist`);
         }
 
         let editorjson = {};
         try {
             editorjson = JSON.parse(editorAsBytes.toString());
-        } catch (err){
+        } catch (err) {
             throw new Error(`Failed to parse Editor ${editorId}, err: ${err}`);
         }
         let editor = Editor.fromJSON(editorjson);
 
         let hashedKey = sha512(editorKey);
-        if(hashedKey !== editor.hashedKey){
+        if (hashedKey !== editor.hashedKey) {
             console.log(`Invalid editor key for editor ${editorId}`);
             return;
         }
@@ -206,7 +206,7 @@ class EurekaContract extends Contract {
         let authorTitleIndexKey = await ctx.stub.createCompositeKey(authorTitleIndexName, [authorId, title]);
 
         let articleExists = await ctx.stub.getState(authorTitleIndexKey);
-        if(!Helper.objExists(articleExists)){
+        if (!Helper.objExists(articleExists)) {
             throw new Error(`Article with title ${title} from author ${authorId} doesnt exist`);
         }
 
@@ -214,7 +214,7 @@ class EurekaContract extends Contract {
         let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
         let reviewingExists = await ctx.stub.getState(authorTitleReviewingIndexKey);
 
-        if(Helper.objExists(reviewingExists)){
+        if (Helper.objExists(reviewingExists)) {
             throw new Error(`Reviewing for Article with title ${title} from author ${authorId} already exists`);
         }
 
@@ -222,7 +222,7 @@ class EurekaContract extends Contract {
         let reviewerIds = JSON.parse(reviewer_ids);
         for (const reviewerId of reviewerIds) {
             let reviewerAsByte = await ctx.stub.getState(reviewerId);
-            if(!reviewerAsByte || !reviewerAsByte.toString()){
+            if (!reviewerAsByte || !reviewerAsByte.toString()) {
                 throw new Error(`Reviewer ${reviewerId} doesnt exist`);
             }
         }
@@ -236,46 +236,46 @@ class EurekaContract extends Contract {
         ctx.stub.setEvent('do_review_event', Buffer.from(JSON.stringify(payload)));
     }
 
-    async reviewArticle(ctx, reviewerId, reviewerKey, authorId, title, mark, comment){
+    async reviewArticle(ctx, reviewerId, reviewerKey, authorId, title, mark, comment) {
 
         //check all inputs
-        if(reviewerId.length <= 0){
+        if (reviewerId.length <= 0) {
             throw new Error("reviewerId must be non-empty string");
         }
-        if(reviewerKey.length <= 0){
+        if (reviewerKey.length <= 0) {
             throw new Error("reviewerKey must be non-empty string");
         }
-        if(authorId.length <= 0){
+        if (authorId.length <= 0) {
             throw new Error("authorId must be non-empty string");
         }
-        if(title.length <= 0){
+        if (title.length <= 0) {
             throw new Error("title must be non-empty string");
         }
-        if(mark.length <= 0){
+        if (mark.length <= 0) {
             throw new Error("mark must be non-empty string");
-        } else if(isNaN(mark)){
+        } else if (isNaN(mark)) {
             throw new Error("mark must be a numeric string");
         }
-        if(comment.length <= 0){
+        if (comment.length <= 0) {
             throw new Error("comment must be non-empty string");
         }
 
         //check reviewer with key
         let reviewerAsBytes = await ctx.stub.getState(reviewerId);
-        if(!Helper.objExists(reviewerAsBytes)){
+        if (!Helper.objExists(reviewerAsBytes)) {
             throw new Error(`Reviewer ${reviewerId} doesnt exist`);
         }
 
         let reviewerJson = {};
         try {
             reviewerJson = JSON.parse(reviewerAsBytes.toString());
-        } catch (err){
+        } catch (err) {
             throw new Error(`Failed to parse Reviewer ${reviewerId}, err: ${err}`);
         }
         let reviewer = Reviewer.fromJSON(reviewerJson);
 
         let hashedKey = sha512(reviewerKey);
-        if(hashedKey !== reviewer.hashedKey){
+        if (hashedKey !== reviewer.hashedKey) {
             console.log(`Invalid reviewer key for reviewerId ${reviewerId}`);
             return;
         }
@@ -292,11 +292,9 @@ class EurekaContract extends Contract {
                     $eq: reviewerId
                 }
             },
-            $not: {
-                reviews: {
-                    $elemMatch: {
-                        reviewer_id: reviewerId
-                    }
+            reviews: {
+                $elemMatch: {
+                    reviewer_id: reviewerId
                 }
             }
         };
@@ -332,37 +330,37 @@ class EurekaContract extends Contract {
         ctx.stub.setEvent('review_done_event', Buffer.from(JSON.stringify(payload)));
     }
 
-    async closeReviewingOfArticle(ctx, editorId, editorKey, authorId, title){
+    async closeReviewingOfArticle(ctx, editorId, editorKey, authorId, title) {
         //check input data
-        if(editorId.length <= 0){
+        if (editorId.length <= 0) {
             throw new Error("editorId must be non-empty string");
         }
-        if(editorKey.length <= 0){
+        if (editorKey.length <= 0) {
             throw new Error("editorKey must be non-empty string");
         }
-        if(authorId.length <= 0){
+        if (authorId.length <= 0) {
             throw new Error("authorId must be non-empty string");
         }
-        if(title.length <= 0){
+        if (title.length <= 0) {
             throw new Error("title must be non-empty string");
         }
 
         //check editor - editorKey
         let editorAsBytes = await ctx.stub.getState(editorId);
-        if(!editorAsBytes || !editorAsBytes.toString()){
+        if (!editorAsBytes || !editorAsBytes.toString()) {
             throw new Error(`Editor ${editorId} doesnt exist`);
         }
 
         let editorjson = {};
         try {
             editorjson = JSON.parse(editorAsBytes.toString());
-        } catch (err){
+        } catch (err) {
             throw new Error(`Failed to parse Editor ${editorId}, err: ${err}`);
         }
         let editor = Editor.fromJSON(editorjson);
 
         let hashedKey = sha512(editorKey);
-        if(hashedKey !== editor.hashedKey){
+        if (hashedKey !== editor.hashedKey) {
             console.log(`Invalid editor key for editor ${editorId}`);
             return;
         }
