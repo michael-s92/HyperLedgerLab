@@ -81,7 +81,7 @@ for (let i = 0; i < parameters.labResults; i++) {
 }
 
 for (let i = 0; i < parameters.enviroments; i++) {
-    warehouseEnvs.push(generateLabResults());
+    warehouseEnvs.push(generateWarehouseEnviroment());
 }
 
 const json = JSON.stringify({

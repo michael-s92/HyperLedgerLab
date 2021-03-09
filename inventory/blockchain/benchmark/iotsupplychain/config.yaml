@@ -23,16 +23,16 @@ test:
 #        tps: 200
 #    callback: ../inventory/blockchain/benchmark/iotsupplychain/common.js
 
-#- label: common
-#    txNumber:
-#    - 1             
-#    rateControl:
-#    - type: fixed-rate
-#      opts:
-#        tps: 1
-#    callback: ../inventory/blockchain/benchmark/iotsupplychain/initLedger.js
+  - label: common
+    txNumber:
+    - 1             
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 1
+    callback: ../inventory/blockchain/benchmark/iotsupplychain/initLedger.js
 
-# ----------------------------------------
+    # ----------------------------------------
   - label: readBlockchain
     txNumber:
     - 1
