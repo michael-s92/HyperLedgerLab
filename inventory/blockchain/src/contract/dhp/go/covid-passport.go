@@ -61,6 +61,8 @@ func (c *CovidPassportChaincode) PurgeExpiredDhps(stub shim.ChaincodeStubInterfa
 	return shim.Success(nil)
 }
 
+// UploadDhp is called by test facilities to upload a pre-created and signed DHP.
+// Expects one argument, a string of a JSON encoded DHP
 func (c *CovidPassportChaincode) UploadDhp(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	// Input Validation
 	if len(args) != 1 {
@@ -81,8 +83,7 @@ func (c *CovidPassportChaincode) UploadDhp(stub shim.ChaincodeStubInterface, arg
 	if issCrtB == nil {
 		return shim.Error(fmt.Sprintf("Issuer certificate for TestFacilityId %s is nil", dhp.Data.TestFacilityId))
 	}
-	var issuerCert IssuerCert = new(ecdsa.PublicKey)
-	err = json.Unmarshal(issCrtB, &issuerCert)
+	issuerCert, err := unmarshalPublicKey(issCrtB)
 	if err != nil {
 		return shim.Error(fmt.Sprintf("Error unmarshaling IssuerCert: %s", err))
 	}
@@ -96,9 +97,35 @@ func (c *CovidPassportChaincode) UploadDhp(stub shim.ChaincodeStubInterface, arg
 		return shim.Error(fmt.Sprintf("Signature validation failed! \n Issuer: %s \n Signature: %#v \n TestResult: %#v", issuerCert, dhp.Signature, data))
 	}
 
+	// Store DHP on ledger
+	storeDhp, err := json.Marshal(&dhp)
+	if err != nil {
+		return shim.Error(fmt.Sprintf("Error marshaling DHP: %s", err))
+	}
+	stub.PutState(dhp.Id, storeDhp)
+
 	return shim.Success(nil)
 }
 
+// Verify the most recent (valid / not expired) result for a given patient and test method
+// Expects 2 arguments: IdHash (of patient) and AcceptedTestType (* for any)
 func (c *CovidPassportChaincode) VerifyResult(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	return shim.Success(nil)
+	// Input Validation
+	if len(args) != 2 {
+		return shim.Error("Incorrect number of arguments. Expecting 2")
+	}
+
+	// TODO
+	// stub.GetQueryResult("")
+	// TODO
+
+	payload, err := json.Marshal(struct {
+		Method TestType `json:"method"`
+		Result bool     `json:"result"`
+	}{})
+	if err != nil {
+		return shim.Error(fmt.Sprintf("Error constructing response payload: %s", err))
+
+	}
+	return shim.Success(payload)
 }
