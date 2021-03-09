@@ -76,7 +76,7 @@ class Batch {
                 });
             }
 
-            return new MyDocument(obj.id, obj.farmerId, obj.warehouseId, obj.inWarehouse, labResult, warehouseAnalysis, obj.discount);
+            return new Batch(obj.id, obj.farmerId, obj.warehouseId, obj.inWarehouse, labResult, warehouseAnalysis, obj.discount);
         }
     }
 
