@@ -24,6 +24,11 @@ class IoTSupplychainContract extends Contract {
     async initLedger(ctx) {
         console.log('=========== START: initLedger Transaction');
 
+        for(const batchJson of seeds.initBatchs){
+           
+            let batch = Batch.fromJSON(batchJson);
+            await ctx.stub.putState(batchJson.id, Buffer.from(JSON.stringify(batch)));
+        }
 
         console.log('=========== END  : initLedger Transaction');
     }

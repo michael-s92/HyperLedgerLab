@@ -5,127 +5,92 @@ const read = require('read-yaml');
 const RandExp = require('randexp');
 
 const Utils = require('./utils');
-const crypto = require('crypto');
 
 const parameters = read.sync('seedParameters.yaml');
 
-let allReader = [];
-let allCustodian = [];
-let allStudent = [];
-let initDocuments = [];
-let benchmarkDocuments = [];
+let farmers = [];
+let warehouses = [];
+let initBatchs = [];
+let benchmarkBatchs = [];
+let labResults = [];
+let warehouseEnvs = [];
 
-function generateIdKeyPair(id_size, key_size){
+function generateBatch(ind, type){
+   
+    let id = Utils.generateRandomLetters(parameters.batchIdSize) + ':' + type + ind;
+    let farmerId = farmers[Utils.getRandomInt(farmers.length)];
+    let warehouseId = warehouses[Utils.getRandomInt(warehouses.length)];
 
-    const id = new RandExp('[a-zA-Z]{'+ id_size +'}').gen();
-    const key = new RandExp('.{'+ key_size +'}').gen();
     return {
         id: id,
-        key: key
-    }
-}
-
-function generateDocumentHash(){
-    let doc = Utils.generateRandomString(parameters.document_length);
-    let hash = crypto.createHash('sha256');
-    hash.update(doc);
-    return hash.digest('hex');
-}
-
-function generateDocument(student, custodians, readers){
-
-    let ind_custodian = Utils.getRandomInt(custodians.length);
-    let num_readers = Utils.getRandomInt(readers.length + 1);
-
-    let docreaders = [];
-
-    for(let i = 0; i < num_readers; i++){
-        let reader = readers[Utils.getRandomInt(readers.length)];
-
-        let index = docreaders.findIndex(x => x === reader);
-         if(index === -1){
-            docreaders.push(reader);
-        } 
-    }
-
-    
-    let documentHash = generateDocumentHash();
-
-    return {
-        documentHash: documentHash,
-        student: student,
-        custodian: custodians[ind_custodian],
-        readers: docreaders
+        farmerId: farmerId,
+        warehouseId: warehouseId
     };
 }
 
-//console.log("=============================== Generate seeds.json started");
+function generateWarehouseEnviroment(){
+    
+    let moisure = Utils.getRandomPercent();
+    let warehouseId = warehouses[Utils.getRandomInt(warehouses.length)];
 
-let i = 0;
-while(i < parameters.allReader){
-    const reader = new RandExp(/[a-zA-Z ]{10,20}/).gen();
-    var index = allReader.findIndex(x => x === reader);
-    if(index === -1){
-        allReader.push(reader);
-        i++;
-    } else {
-        console.log("Already exists: " + reader);
-    }
+    return {
+        warehouseId: warehouseId,
+        moisure: moisure
+    };
 }
 
-let id_size = parameters.idSize;
-let key_size = parameters.keySize;
+function generateLabResults(){
 
-i = 0;
-while(i < parameters.allCustodian){
-    let pair = generateIdKeyPair(id_size, key_size);
-    var index = allCustodian.findIndex(x => x.id === pair.id);
-    if(index === -1){
-        allCustodian.push(pair);
-        i++;
-    } else {
-        console.log(`${pair.id} already exists`);
-    }
+    let labId = 'LAB' + Utils.getRandomInt(1000);
+    let impurity_percent = Utils.getRandomPercent();
+    let broken_percent = Utils.getRandomPercent();
+    let damaged_percent = Utils.getRandomPercent();
+    let greenisch_percent = Utils.getRandomPercent();
+
+    return {
+        labId: labId,
+        impurity_percent: impurity_percent,
+        broken_percent: broken_percent,
+        damaged_percent: damaged_percent,
+        greenisch_percent: greenisch_percent
+    };
 }
 
-i = 0;
-while(i < parameters.initDocuments){
-    let pair = generateIdKeyPair(id_size, key_size);
-    var index = allStudent.findIndex(x => x.id === pair.id);
-    if(index === -1){
-        allStudent.push(pair);
-
-        let doc = generateDocument(pair, allCustodian, allReader);
-        initDocuments.push(doc);
-
-        i++;
-    } else {
-        console.log(`${pair.id} already exists`);
-    }
+for (let i = 0; i < parameters.farmers; i++) {
+    const farmer = Utils.generateRandomLetters(20) + ':F' + i;
+    farmers.push(farmer);
 }
 
-i = 0;
-while(i < parameters.newDocuments){
-    let pair = generateIdKeyPair(id_size, key_size);
-    var index = allStudent.findIndex(x => x.id === pair.id);
-    if(index === -1){
-        allStudent.push(pair);
+for (let i = 0; i < parameters.warehouses; i++) {
+    const warehouse = Utils.generateRandomLetters(20) + ':W' + i;
+    warehouses.push(warehouse);
+}
 
-        let doc = generateDocument(pair, allCustodian, allReader);
-        benchmarkDocuments.push(doc);
+for (let i = 0; i < parameters.initBatchs; i++) {
+    const batch = generateBatch(i, 'I');
+    initBatchs.push(batch);
+}
 
-        i++;
-    } else {
-        console.log(`${pair.id} already exists`);
-    }
+for (let i = 0; i < parameters.benchmarkBatchs; i++) {
+    const batch = generateBatch(i, 'B');
+    benchmarkBatchs.push(batch);
+}
+
+for (let i = 0; i < parameters.labResults; i++) {
+    labResults.push(generateLabResults());
+}
+
+for (let i = 0; i < parameters.enviroments; i++) {
+    warehouseEnvs.push(generateLabResults());
 }
 
 const json = JSON.stringify({
-    allReader: allReader,
-    allCustodian: allCustodian,
-    allStudent: allStudent,
-    initDocuments: initDocuments,
-    benchmarkDocuments: benchmarkDocuments
+    farmers: farmers,
+    warehouses: warehouses,
+    initBatchs: initBatchs,
+    benchmarkBatchs: benchmarkBatchs,
+    labResults: labResults,
+    warehouseEnvs: warehouseEnvs
 }, null, 4);
 
 fs.writeFile('seeds.json', json, function(err) {

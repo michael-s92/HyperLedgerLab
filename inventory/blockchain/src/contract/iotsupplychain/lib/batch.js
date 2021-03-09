@@ -60,7 +60,7 @@ class Batch {
 
     static fromJSON(obj) {
 
-        if (obj.id !== undefined && obj.farmerId !== undefined && obj.warehouseId !== undefined && obj.inWarehouse !== undefined) {
+        if (obj.id !== undefined && obj.farmerId !== undefined && obj.warehouseId !== undefined) {
 
             let labResult;
             if (obj.labResult !== undefined) {

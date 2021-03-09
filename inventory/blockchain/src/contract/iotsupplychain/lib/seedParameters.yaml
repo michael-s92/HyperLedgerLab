@@ -1,7 +1,7 @@
-allCustodian: 10
-allReader: 50
-idSize: 10
-keySize: 50
-document_length: 1024
-initDocuments: 100
-newDocuments: 10000
+farmers: 5
+warehouses: 10
+initBatchs: 20
+benchmarkBatchs: 100
+batchIdSize: 30
+labResults: 1000
+enviroments: 1000
