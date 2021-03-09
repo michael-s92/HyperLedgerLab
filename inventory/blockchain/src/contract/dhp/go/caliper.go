@@ -18,13 +18,13 @@ func (c *CovidPassportChaincode) InitLedger(stub shim.ChaincodeStubInterface) pb
 }
 
 func (c *CovidPassportChaincode) DoNothing(stub shim.ChaincodeStubInterface) pb.Response {
-	var tf1PrivateKey *ecdsa.PrivateKey
-	if err := json.Unmarshal([]byte(tf1PrivateKeyStr), tf1PrivateKey); err != nil {
+	var tf1PrivateKey ecdsa.PrivateKey
+	if err := json.Unmarshal([]byte(tf1PrivateKeyStr), &tf1PrivateKey); err != nil {
 		return shim.Error(fmt.Sprintf("Error unmarshaling tf1PrivateKey: %s", err))
 	}
 
 	// Test Patient: Milan
-	dhp1, err := generateDhp("001", "TF-1-Theresienwiese", tf1PrivateKey, "Milan", "PCR", true)
+	dhp1, err := generateDhp("001", "TF-1-Theresienwiese", &tf1PrivateKey, "Milan", "PCR", true)
 	if err != nil {
 		return shim.Error(fmt.Sprintf("Error generating dhp1: %s", err))
 	}

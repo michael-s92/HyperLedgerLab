@@ -81,7 +81,7 @@ func (c *CovidPassportChaincode) UploadDhp(stub shim.ChaincodeStubInterface, arg
 	if issCrtB == nil {
 		return shim.Error(fmt.Sprintf("Issuer certificate for TestFacilityId %s is nil", dhp.Data.TestFacilityId))
 	}
-	var issuerCert IssuerCert
+	var issuerCert IssuerCert = new(ecdsa.PublicKey)
 	err = json.Unmarshal(issCrtB, &issuerCert)
 	if err != nil {
 		return shim.Error(fmt.Sprintf("Error unmarshaling IssuerCert: %s", err))
