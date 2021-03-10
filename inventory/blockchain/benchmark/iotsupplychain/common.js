@@ -3,6 +3,7 @@
 const sendBanchToWarehouse = require('./sendBanchToWarehouse');
 const saveChemicalAnalysToBatch = require('./saveChemicalAnalysToBatch');
 const savePsysicalAnalysToBatch = require('./savePsysicalAnalysToBatch');
+const moveBatchToFoodCompany = require('./moveBatchToFoodCompany');
 
 const pick = require('pick-random-weighted');
 var deck = require('deck');
@@ -10,7 +11,8 @@ var deck = require('deck');
 const ALLTESTCASE = [
     sendBanchToWarehouse,
     saveChemicalAnalysToBatch,
-    savePsysicalAnalysToBatch
+    savePsysicalAnalysToBatch,
+    moveBatchToFoodCompany
 ];
 
 // PROVIDE NUMBER OF TESTCASES
@@ -53,7 +55,7 @@ module.exports.run = function () {
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[testPick]);
 
     //!!! let args = ALLTESTCASE[testPick].get();
-    let args = ALLTESTCASE[2].get();
+    let args = ALLTESTCASE[3].get();
 
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);
