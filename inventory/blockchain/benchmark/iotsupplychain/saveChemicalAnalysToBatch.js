@@ -28,7 +28,7 @@ class saveChemicalAnalysToBatch {
 
         // saveChemicalAnalysToBatch(ctx, batchId, labId, impurity_percent, broken_percent, damaged_percent, greenisch_percent)
         args = {
-            chaincodeFunction: 'sendBanchToWarehouse',
+            chaincodeFunction: 'saveChemicalAnalysToBatch',
             chaincodeArguments: [batch.id, labResult.labId, labResult.impurity_percent, labResult.broken_percent, labResult.damaged_percent, labResult.greenisch_percent]
         };
 
