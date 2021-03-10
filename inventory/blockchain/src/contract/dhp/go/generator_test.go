@@ -44,4 +44,7 @@ func TestDhpSignVerify(t *testing.T) {
 		t.Errorf("Signature validation failed! \n Issuer: %s \n Signature: %#v \n TestResult: %#v", *issCrt, dhp1.Signature, data)
 	}
 
+	// DEBUG
+	t.Logf("Issuer: %s \n Signature: %#v \n TestResult: %#v", *issCrt, dhp1.Signature, data)
+
 }

@@ -33,8 +33,10 @@ func generateDhp(dhpId, testFacilityId string, testFacilityPrivateKey *ecdsa.Pri
 		Patient:        IdHash(hash([]byte(patientDid))),
 		Method:         TestType(method),
 		Result:         result,
-		Date:           time.Now().AddDate(0, 0, -1).Truncate(24 * time.Hour),
-		ExpiryDate:     time.Now().AddDate(0, 0, 2).Truncate(24 * time.Hour),
+		Date:           time.Date(2021, 3, 9, 0, 0, 0, 0, time.UTC),
+		ExpiryDate:     time.Date(2021, 3, 11, 0, 0, 0, 0, time.UTC),
+		// Date:           time.Now().AddDate(0, 0, -1).Truncate(24 * time.Hour),
+		// ExpiryDate:     time.Now().AddDate(0, 0, 2).Truncate(24 * time.Hour),
 	}
 	testResultB, err := json.Marshal(&testResult)
 	if err != nil {
