@@ -54,15 +54,3 @@ func generateDhp(dhpId, testFacilityId string, testFacilityPrivateKey *ecdsa.Pri
 		},
 	}, nil
 }
-
-func generateExpiredDhp(dhpId, testFacilityId string, testFacilityPrivateKey *ecdsa.PrivateKey,
-	patientDid, method string, result bool) (*Dhp, error) {
-	dhp, err := generateDhp(dhpId, testFacilityId, testFacilityPrivateKey, patientDid, method, result)
-	if err != nil {
-		return dhp, err
-	}
-
-	dhp.Data.Date = time.Now().AddDate(0, 0, -3)
-	dhp.Data.ExpiryDate = time.Now().AddDate(0, 0, -1)
-	return dhp, nil
-}

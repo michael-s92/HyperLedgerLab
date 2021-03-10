@@ -94,7 +94,7 @@ func (c *CovidPassportChaincode) UploadDhp(stub shim.ChaincodeStubInterface, arg
 		return shim.Error(fmt.Sprintf("Error marshaling TestResult data inside DHP: %s", err))
 	}
 	if !validateSignature(data, dhp.Signature, issuerCert) {
-		return shim.Error(fmt.Sprintf("Signature validation failed! \n Issuer: %s \n Signature: %#v \n TestResult: %#v", issuerCert, dhp.Signature, data))
+		return shim.Error(fmt.Sprintf("Signature validation failed! \n Issuer: %#v \n Signature: %#v \n TestResult: %#v", *issuerCert, dhp.Signature, data))
 	}
 
 	// Store DHP on ledger
