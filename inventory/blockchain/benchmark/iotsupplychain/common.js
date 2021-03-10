@@ -24,14 +24,18 @@ let testCasePermuation = [
     0,
     1,
     2,
-    3
+    3,
+    4,
+    5
 ];
 
 const testCasePermuationWeighted = [
         [ 0, 20 ],
-        [ 1, 100 ],
-        [ 2, 10 ],
-        [ 3, 40 ]
+        [ 1, 20 ],
+        [ 2, 500 ],
+        [ 3, 40 ],
+        [ 4, 30 ],
+        [ 5, 30 ]
 ];
     
 
@@ -53,13 +57,12 @@ module.exports.init = function (blockchain, context, args) {
 };
 module.exports.run = function () {
 
-    //!!! const testPick = pick(testCasePermuationWeighted);
+    const testPick = pick(testCasePermuationWeighted);
 
     //let testPick = deck.pick(testCasePermuation); //uniformPick
     //console.info('--------------------------- TRANSACTION TO BE INVOKED: ' + ALLTESTCASE[testPick]);
 
-    //!!! let args = ALLTESTCASE[testPick].get();
-    let args = ALLTESTCASE[5].get();
+    let args = ALLTESTCASE[testPick].get();
 
 
     let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);
