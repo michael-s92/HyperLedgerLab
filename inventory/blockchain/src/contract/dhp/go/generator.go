@@ -11,7 +11,7 @@ import (
 )
 
 func generateTestFacility(stub shim.ChaincodeStubInterface, id, privateKey string) error {
-	privKey, err := unmarshalPrivateKey([]byte(privateKey))
+	privKey, err := unmarshalPrivateKey(privateKey)
 	if err != nil {
 		return fmt.Errorf("Error unmarshaling pregenerated ECDSA keypair for Test Facility: %s: %w", id, err)
 	}

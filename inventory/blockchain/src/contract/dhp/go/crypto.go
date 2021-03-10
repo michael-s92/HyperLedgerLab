@@ -4,7 +4,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/sha256"
 	"crypto/x509"
-	"encoding/json"
+	"encoding/base64"
 	"fmt"
 )
 
@@ -21,21 +21,17 @@ func hash(b []byte) []byte {
 	return h.Sum(nil)
 }
 
-func marshalPrivateKey(key *ecdsa.PrivateKey) ([]byte, error) {
+func marshalPrivateKey(key *ecdsa.PrivateKey) (string, error) {
 	pkBB, err := x509.MarshalPKCS8PrivateKey(key)
 	if err != nil {
-		return nil, fmt.Errorf("Error marshaling ECDSA to binary: %s", err)
+		return "", fmt.Errorf("Error marshaling ECDSA to binary: %s", err)
 	}
-	pkBJ, err := json.Marshal(&pkBB)
-	if err != nil {
-		return nil, fmt.Errorf("Error marshaling ECDSA binary to JSON: %s", err)
-	}
-	return pkBJ, nil
+	return base64.StdEncoding.EncodeToString(pkBB), nil
 }
 
-func unmarshalPrivateKey(marshaledKey []byte) (*ecdsa.PrivateKey, error) {
-	var upkBB []byte
-	if err := json.Unmarshal(marshaledKey, &upkBB); err != nil {
+func unmarshalPrivateKey(marshaledKey string) (*ecdsa.PrivateKey, error) {
+	upkBB, err := base64.StdEncoding.DecodeString(marshaledKey)
+	if err != nil {
 		return nil, fmt.Errorf("Error unmarshaling JSON binary to ECDSA: %s", err)
 	}
 	upKi, err := x509.ParsePKCS8PrivateKey(upkBB)
@@ -45,21 +41,17 @@ func unmarshalPrivateKey(marshaledKey []byte) (*ecdsa.PrivateKey, error) {
 	return upKi.(*ecdsa.PrivateKey), nil
 }
 
-func marshalPublicKey(key *ecdsa.PublicKey) ([]byte, error) {
+func marshalPublicKey(key *ecdsa.PublicKey) (string, error) {
 	pkBB, err := x509.MarshalPKIXPublicKey(key)
 	if err != nil {
-		return nil, fmt.Errorf("Error marshaling ECDSA to binary: %s", err)
+		return "", fmt.Errorf("Error marshaling ECDSA to binary: %s", err)
 	}
-	pkBJ, err := json.Marshal(&pkBB)
-	if err != nil {
-		return nil, fmt.Errorf("Error marshaling ECDSA binary to JSON: %s", err)
-	}
-	return pkBJ, nil
+	return base64.StdEncoding.EncodeToString(pkBB), nil
 }
 
-func unmarshalPublicKey(marshaledKey []byte) (*ecdsa.PublicKey, error) {
-	var upkBB []byte
-	if err := json.Unmarshal(marshaledKey, &upkBB); err != nil {
+func unmarshalPublicKey(marshaledKey string) (*ecdsa.PublicKey, error) {
+	upkBB, err := base64.StdEncoding.DecodeString(marshaledKey)
+	if err != nil {
 		return nil, fmt.Errorf("Error unmarshaling JSON binary to ECDSA: %s", err)
 	}
 	upKi, err := x509.ParsePKIXPublicKey(upkBB)

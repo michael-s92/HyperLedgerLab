@@ -9,9 +9,9 @@ import (
 )
 
 var (
-	tfKey1 string = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgtBf/GeoCI+FfjThz1EjS2L/OuvZN+RDh5OzbUoSyR2GhRANCAASAwWk9vZcswsuxdyH8QMBc1+ym5DW2DYQcw1pNuzj6DwZMqI1ClloIPJvpMHShCQPqBcOcb7+L7JgFToWCDIXU"
-	tfKey2 string = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgmPKQMVfjuvVRsVCJadJYAGz4iYjePTUZP1/DggRatJ6hRANCAASW3I/UtT068Ca7yBprdIYbE3FFSeFP4b1oVP+yeVLUKthbJRtGx4PlflGBmcnrDgssui1GXpo43dFDXC9IDzyL"
-	tfKey3 string = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg+UysfVrw+AByu3jVAt8gNq2lfpqv/dshFsVAzdsZbFqhRANCAAQB2ZhhVhEvvjyaaJgBIE4Xs2Cp4oqRs5Evv0Yh85UgkUpIgQQzpGRE+6bBjty4OaU+clMpZ+UVc5mL/zsKlMqZ"
+	tfKey1 string = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgN33Tn1iVORYJKbMlyWK5erHetMRmbNqTbFiAzwE+vA6hRANCAASxhkksdofM3NoKHrZoFl79RMoh+tMjWIiu61mlBTvml5jcdP3X2XHxtYuCXmkjK7dT0fQw72kyojwm6vbd+clC"
+	tfKey2 string = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgRDsFbT75TZ1mP7EIMGGfdt83VmoVyypPZVJkn9QJxWuhRANCAATwTCATI0CP2oMcA0u0swtzFDEmEQIUgd++CTF9JIBKNxqbe92g3X7saHK2puc+OSDKvVsO3TO6o5kNRZ0727o+"
+	tfKey3 string = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg0AQREEYO75R0Dmtp1/DPa3nFWSTk/7QWpLjefY46SR6hRANCAAQTq7kswYZ6q+A6J1rw42YRGC+WACZvoQq9CnuWP3pMA58bcXsLi0eB3BwEdwtTV9zKD6qgCrxM99Qd0qBkNecA"
 )
 
 func (c *CovidPassportChaincode) InitLedger(stub shim.ChaincodeStubInterface) pb.Response {
@@ -29,7 +29,7 @@ func (c *CovidPassportChaincode) InitLedger(stub shim.ChaincodeStubInterface) pb
 }
 
 func (c *CovidPassportChaincode) DoNothing(stub shim.ChaincodeStubInterface) pb.Response {
-	privateKey, err := unmarshalPrivateKey([]byte(tfKey1))
+	privateKey, err := unmarshalPrivateKey(tfKey1)
 	if err != nil {
 		return shim.Error(fmt.Sprintf("Error unmarshaling pregenerated ECDSA keypair for Test Facility TF-1: %s", err))
 	}

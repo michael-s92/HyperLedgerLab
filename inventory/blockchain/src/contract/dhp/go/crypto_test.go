@@ -16,27 +16,35 @@ func TestGenerateTestFacilityKeys(t *testing.T) {
 	%s
 	)
 	`
-	tfKeyLine := `	tfKey%d string = %s
+	tfKeyLine := `	tfKey%d string = "%s"
 	`
 
 	var tfKeyCodeBlock string
 	for i := 1; i <= 3; i++ {
 		privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 		if err != nil {
-			t.Error("Error generating ECDSA keypair")
+			t.Errorf("Error generating ECDSA keypair: %s", err)
 		}
-		pkBB, err := x509.MarshalPKCS8PrivateKey(privateKey)
+		pkStr, err := marshalPrivateKey(privateKey)
 		if err != nil {
-			t.Errorf("Error marshaling ECDSA to binary: %s", err)
-		}
-		pkBJ, err := json.Marshal(&pkBB)
-		if err != nil {
-			t.Errorf("Error marshaling ECDSA binary to JSON: %s", err)
+			t.Error(err)
 		}
 
-		tfKeyCodeBlock += fmt.Sprintf(tfKeyLine, i, pkBJ)
+		tfKeyCodeBlock += fmt.Sprintf(tfKeyLine, i, pkStr)
 	}
 	t.Logf(varCodeBlock, tfKeyCodeBlock)
+}
+
+func TestUnmarshalPregeneratedKeys(t *testing.T) {
+	if _, err := unmarshalPrivateKey(tfKey1); err != nil {
+		t.Errorf("Error unmarshaling pregenerated ECDSA keypair for Test Facility: TF-1: %w", err)
+	}
+	if _, err := unmarshalPrivateKey(tfKey2); err != nil {
+		t.Errorf("Error unmarshaling pregenerated ECDSA keypair for Test Facility: TF-2: %w", err)
+	}
+	if _, err := unmarshalPrivateKey(tfKey3); err != nil {
+		t.Errorf("Error unmarshaling pregenerated ECDSA keypair for Test Facility: TF-3: %w", err)
+	}
 }
 
 func TestECCMarshalBidirectional(t *testing.T) {
