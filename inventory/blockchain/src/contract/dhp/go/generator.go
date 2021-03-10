@@ -15,11 +15,11 @@ func generateTestFacility(stub shim.ChaincodeStubInterface, id, privateKey strin
 	if err != nil {
 		return fmt.Errorf("Error unmarshaling pregenerated ECDSA keypair for Test Facility: %s: %w", id, err)
 	}
-	publicKeyB, err := json.Marshal(&privKey.PublicKey)
+	publicKeyStr, err := marshalPublicKey(&privKey.PublicKey)
 	if err != nil {
 		return fmt.Errorf("Error marshaling ECDSA public key for Test Facility: %s: %w", id, err)
 	}
-	if err := stub.PutState(id, publicKeyB); err != nil {
+	if err := stub.PutState(id, []byte(publicKeyStr)); err != nil {
 		return fmt.Errorf("Error persisting Test Facility %s on ledger: %w", id, err)
 	}
 	return nil
