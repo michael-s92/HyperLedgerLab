@@ -78,8 +78,8 @@ channels:                   # List of channel objects
 #        version: v1
       - id: covid-passport
         contractID: covid-passport               # NOTE: This should be unique for chaincodes across channels
-        path: "contract/covid-passport/go/"      # NOTE: Path to Directory where chaincode file is located
-        metadataPath: "{{ inventory_dir }}/src/contract/covid-passport/go/metadata/"
+        path: "contract/covid-passport/"      # NOTE: Path to Directory where chaincode file is located
+        metadataPath: "{{ inventory_dir }}/src/contract/covid-passport/metadata/"
         language: golang
         version: v1
 #      - id: javatest
