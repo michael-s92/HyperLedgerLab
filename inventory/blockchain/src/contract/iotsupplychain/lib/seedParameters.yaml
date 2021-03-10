@@ -1,0 +1,7 @@
+farmers: 5
+warehouses: 10
+initBatchs: 20
+benchmarkBatchs: 100
+batchIdSize: 30
+labResults: 1000
+enviroments: 1000
