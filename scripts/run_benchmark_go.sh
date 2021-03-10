@@ -29,7 +29,7 @@ fi
 benchmark_dir=inventory/blockchain/benchmark/$chaincode
 cd $benchmark_dir && npm install # && node generator.js
 set -x
-cd $contract_dir/ && ./hack/generator
+cd $contract_dir && $contract_dir/hack/generator
 #cp $benchmark_dir/seeds.json $contract_dir/
 sleep 2s
 set +x
