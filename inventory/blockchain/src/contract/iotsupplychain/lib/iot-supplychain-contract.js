@@ -187,8 +187,8 @@ class IoTSupplychainContract extends Contract {
         let batch = Batch.fromJSON(batchJson);
 
         // check if there is no LabResults
-        if (batch.labResult !== undefined) {
-            throw new Error(`Batch ${batchId} already has labResults`);
+        if (batch.inWarehouse === undefined || batch.inWarehouse === false) {
+            throw new Error(`Batch ${batchId} already has moved`);
         }
 
         // move batch to producer
@@ -217,11 +217,6 @@ class IoTSupplychainContract extends Contract {
         }
 
         let batch = Batch.fromJSON(batchJson);
-
-        // check if there is no LabResults
-        if (batch.labResult !== undefined) {
-            throw new Error(`Batch ${batchId} already has labResults`);
-        }
 
         // move batch to producer
         batch.calculateDiscount();
