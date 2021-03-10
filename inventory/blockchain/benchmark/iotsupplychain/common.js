@@ -65,7 +65,7 @@ module.exports.run = function () {
     let args = ALLTESTCASE[testPick].get();
 
 
-    let txstatus = bc.invokeSmartContract(contx, 'notarization', 'v1', args, 120);
+    let txstatus = bc.invokeSmartContract(contx, 'iotsupplychain', 'v1', args, 120);
     //console.info('TRANSACTION STATUS');
 
     txstatus.then(function(result) {
