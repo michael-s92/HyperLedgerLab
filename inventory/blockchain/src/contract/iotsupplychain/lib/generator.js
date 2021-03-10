@@ -30,7 +30,7 @@ function generateBatch(ind, type){
 
 function generateWarehouseEnviroment(){
     
-    let moisure = Utils.getRandomPercent();
+    let moisure = Utils.getRandomPercent().toString();
     let warehouseId = warehouses[Utils.getRandomInt(warehouses.length)];
 
     return {
@@ -42,10 +42,10 @@ function generateWarehouseEnviroment(){
 function generateLabResults(){
 
     let labId = 'LAB' + Utils.getRandomInt(1000);
-    let impurity_percent = Utils.getRandomPercent();
-    let broken_percent = Utils.getRandomPercent();
-    let damaged_percent = Utils.getRandomPercent();
-    let greenisch_percent = Utils.getRandomPercent();
+    let impurity_percent = Utils.getRandomPercent().toString();
+    let broken_percent = Utils.getRandomPercent().toString();
+    let damaged_percent = Utils.getRandomPercent().toString();
+    let greenisch_percent = Utils.getRandomPercent().toString();
 
     return {
         labId: labId,
