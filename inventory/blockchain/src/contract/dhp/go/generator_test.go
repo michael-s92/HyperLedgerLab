@@ -19,6 +19,10 @@ func TestDhpSignVerify(t *testing.T) {
 		t.Errorf("Error generating dhp1: %s", err)
 	}
 
+	// DEBUG
+	t.Logf("Date: %s", dhp1.Data.Date)
+	t.Logf("ExpiryDate: %s", dhp1.Data.ExpiryDate)
+
 	// Simulate PubKey Put/Set on channel
 	tmp1, err := marshalPublicKey(&tf1PubKey)
 	if err != nil {
