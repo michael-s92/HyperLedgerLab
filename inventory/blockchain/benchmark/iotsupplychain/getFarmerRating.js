@@ -4,7 +4,7 @@
 const utils = require('./utils');
 const seeds = require('./seeds.json');
 
-class calculateDiscount {
+class getFarmerRating {
 
     static get() {
         let args;
@@ -17,10 +17,10 @@ class calculateDiscount {
 
         let batch = seeds.initBatchs[randomAccessKey];
 
-        // calculateDiscount(ctx, batchId)
+        // getFarmerRating(ctx, batchId)
 
         args = {
-            chaincodeFunction: 'calculateDiscount',
+            chaincodeFunction: 'getFarmerRating',
             chaincodeArguments: [batch.id]
         };
 
@@ -29,4 +29,4 @@ class calculateDiscount {
     }
 }
 
-module.exports = calculateDiscount;
+module.exports = getFarmerRating;
