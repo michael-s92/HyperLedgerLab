@@ -7,7 +7,7 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 
-	"github.com/michael-s92/HyperLedgerLab/tree/master/inventory/blockchain/src/contract/covid-passport/pkg/chaincode"
+	"github.com/michael-s92/HyperLedgerLab/inventory/blockchain/src/contract/covid-passport/pkg/chaincode"
 )
 
 // ===================================================================================

@@ -10,7 +10,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 
-	ccrypto "github.com/michael-s92/HyperLedgerLab/tree/master/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
+	ccrypto "github.com/michael-s92/HyperLedgerLab/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
 )
 
 type CovidPassportChaincode struct {
@@ -76,6 +76,8 @@ func (c *CovidPassportChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Res
 		return c.InitLedger(stub)
 	} else if function == "doNothing" {
 		return c.DoNothing(stub)
+	} else if function == "testUploadDhpValid" {
+		return c.TestUploadDhpValid(stub)
 	}
 
 	fmt.Println("invoke did not find func: " + function) //error

@@ -9,7 +9,7 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 
-	crypto "github.com/michael-s92/HyperLedgerLab/tree/master/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
+	crypto "github.com/michael-s92/HyperLedgerLab/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
 )
 
 func GenerateTestFacility(stub shim.ChaincodeStubInterface, id, privateKey string) error {

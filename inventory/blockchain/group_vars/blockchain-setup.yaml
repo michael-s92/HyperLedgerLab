@@ -76,10 +76,10 @@ channels:                   # List of channel objects
 #        metadataPath: "{{ inventory_dir }}/src/contract/notarization-v2/metadata/"
 #        language: node
 #        version: v1
-      - id: dhp
-        contractID: dhp               # NOTE: This should be unique for chaincodes across channels
-        path: "contract/dhp/go/"      # NOTE: Path to Directory where chaincode file is located
-        metadataPath: "{{ inventory_dir }}/src/contract/dhp/go/metadata/"
+      - id: covid-passport
+        contractID: covid-passport               # NOTE: This should be unique for chaincodes across channels
+        path: "contract/covid-passport/go/"      # NOTE: Path to Directory where chaincode file is located
+        metadataPath: "{{ inventory_dir }}/src/contract/covid-passport/go/metadata/"
         language: golang
         version: v1
 #      - id: javatest

@@ -31,6 +31,10 @@ func (c *CovidPassportChaincode) InitLedger(stub shim.ChaincodeStubInterface) pb
 }
 
 func (c *CovidPassportChaincode) DoNothing(stub shim.ChaincodeStubInterface) pb.Response {
+	return c.TestUploadDhpValid(stub)
+}
+
+func (c *CovidPassportChaincode) TestUploadDhpValid(stub shim.ChaincodeStubInterface) pb.Response {
 	dhp1, err := SeedRandomValidDhp()
 	if err != nil {
 		return shim.Error(fmt.Sprintf("Error seeding random valid DHP: %s", err))

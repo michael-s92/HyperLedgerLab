@@ -12,8 +12,8 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/michael-s92/HyperLedgerLab/tree/master/inventory/blockchain/src/contract/covid-passport/pkg/chaincode"
-	ccrypto "github.com/michael-s92/HyperLedgerLab/tree/master/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
+	"github.com/michael-s92/HyperLedgerLab/inventory/blockchain/src/contract/covid-passport/pkg/chaincode"
+	ccrypto "github.com/michael-s92/HyperLedgerLab/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
 )
 
 type SeedParameters struct {

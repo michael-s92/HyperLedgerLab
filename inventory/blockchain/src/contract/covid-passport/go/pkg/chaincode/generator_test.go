@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	ccrypto "github.com/michael-s92/HyperLedgerLab/tree/master/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
+	ccrypto "github.com/michael-s92/HyperLedgerLab/inventory/blockchain/src/contract/covid-passport/pkg/crypto"
 )
 
 func TestGenerateTestFacilityKeys(t *testing.T) {
