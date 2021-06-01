@@ -49,7 +49,8 @@ else
         mkdir venv
         sudo apt update
         #sudo apt-get install --yes python-pip
-        curl -O https://bootstrap.pypa.io/2.7/get-pip.py
+        curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+        #curl -O https://bootstrap.pypa.io/2.7/get-pip.py
         python get-pip.py
         sudo python -m pip install --upgrade "pip < 21.0"
         pip install virtualenv
