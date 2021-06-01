@@ -50,6 +50,7 @@ else
         sudo apt update
         #sudo apt-get install --yes python-pip
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+        sudo apt install python-minimal
         #curl -O https://bootstrap.pypa.io/2.7/get-pip.py
         python get-pip.py
         sudo python -m pip install --upgrade "pip < 21.0"
