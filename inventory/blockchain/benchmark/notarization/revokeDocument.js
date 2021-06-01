@@ -15,8 +15,8 @@ class revokeDocument {
             2) get random document from initDocuments
         */
 
-        // probability to pick document than doesnt exist - 0.5%
-        let scenario = utils.getRandomInt(200);
+        // probability to pick document than doesnt exist - 0.001%
+        let scenario = utils.getRandomInt(1000);
 
         if(scenario === 0){
 

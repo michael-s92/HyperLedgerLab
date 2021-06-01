@@ -24,8 +24,8 @@ class getDocumentValue {
         let reader = seeds.allReader[randomAccessKey];  
 
 
-        // lets set that just 0.5% of all cases can be an error with random data
-        let scenario = utils.getRandomInt(200);
+        // lets set that just 0.001% of all cases can be an error with random data
+        let scenario = utils.getRandomInt(1000);
 
         if(scenario === 0){
 

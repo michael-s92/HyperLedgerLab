@@ -15,8 +15,8 @@ class getAllDocumentReaders {
             2) get random document from initLedgerDocuments
         */
 
-        //probability for wrong data - 0.5%
-        let scenario = utils.getRandomInt(200);
+        //probability for wrong data - 0.001%
+        let scenario = utils.getRandomInt(1000);
 
         if(scenario === 0){
 
