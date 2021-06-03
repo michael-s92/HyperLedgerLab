@@ -7,73 +7,36 @@ const seeds = require('./seeds.json');
 class getDocumentValue {
 
     static get() {
-	    let args;
-
-        /*
-            2 different scenario for this test
-            1) get all data for arg random
-            2) get random document from initDocuments
-        */
+        let args;
 
         // select random reader
         let randomAccessKey = 0;
-        do{
+        do {
             randomAccessKey = utils.getRandomInt(seeds.allReader.length);
-        } while(seeds.allReader[randomAccessKey] === undefined);
+        } while (seeds.allReader[randomAccessKey] === undefined);
 
-        let reader = seeds.allReader[randomAccessKey];  
+        let reader = seeds.allReader[randomAccessKey];
 
 
-        // lets set that just 0.001% of all cases can be an error with random data
-        let scenario = utils.getRandomInt(1000);
+        // select random document from initDocuments
+        randomAccessKey = 0;
+        do {
+            randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
+        } while (seeds.initDocuments[randomAccessKey] === undefined);
 
-        if(scenario === 0){
+        let doc = seeds.initDocuments[randomAccessKey];
 
-            // select random student
-            randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allStudent.length);
-            } while(seeds.allStudent[randomAccessKey] === undefined);
+        // getDocumentValue(ctx, custodianId, studentId, readerName)
 
-            let student = seeds.allStudent[randomAccessKey];
+        args = {
+            chaincodeFunction: 'getDocumentValue',
+            chaincodeArguments: [doc.custodian.id, doc.student.id, reader]
+        };
 
-            // select random custodian
-            randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.allCustodian.length);
-            } while(seeds.allCustodian[randomAccessKey] === undefined);
 
-            let custodian = seeds.allCustodian[randomAccessKey];
+        return args;
 
-            // getDocumentValue(ctx, custodianId, studentId, readerName)
-
-            args = {
-                    chaincodeFunction: 'getDocumentValue',
-                    chaincodeArguments: [custodian.id, student.id, reader]
-                };
-
-        } else {
-            
-            // select random document from initDocuments
-            randomAccessKey = 0;
-            do{
-                randomAccessKey = utils.getRandomInt(seeds.initDocuments.length);
-            } while(seeds.initDocuments[randomAccessKey] === undefined);
-
-            let doc = seeds.initDocuments[randomAccessKey];
-
-            // getDocumentValue(ctx, custodianId, studentId, readerName)
-
-            args = {
-                    chaincodeFunction: 'getDocumentValue',
-                    chaincodeArguments: [doc.custodian.id, doc.student.id, reader]
-                };
-
-        }
-
-	    return args;
-
-	}
+    }
 }
 
 module.exports = getDocumentValue;
