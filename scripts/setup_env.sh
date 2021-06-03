@@ -27,6 +27,7 @@ then
     then
         # Setup node environment
         set -x
+        sudo apt-get install build-essential
         sudo apt-get remove nodejs npm
         sudo apt-get update
         sudo apt-get upgrade
