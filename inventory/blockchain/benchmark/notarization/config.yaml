@@ -14,7 +14,70 @@ test:
         tps: 1
     callback: ../inventory/blockchain/benchmark/notarization/initLedger.js
 
-  - label: common
+  - label: common25
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 25
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common50
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 50
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common75
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 75
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common100
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 100
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common125
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 125
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common150
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 150
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common175
+    txDuration:
+    - 180
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 175
+    callback: ../inventory/blockchain/benchmark/notarization/common.js
+
+  - label: common200
     txDuration:
     - 180
     rateControl:
