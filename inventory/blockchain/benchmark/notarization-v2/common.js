@@ -25,9 +25,9 @@ let testCasePermuation = [
 
 const testCasePermuationWeighted = [
         [ 0, 20 ],
-        [ 1, 100 ],
-        [ 2, 10 ],
-        [ 3, 40 ]
+        [ 1, 50 ],
+        [ 2, 5 ],
+        [ 3, 25 ]
 ];
 
 function isDefined(t) {
