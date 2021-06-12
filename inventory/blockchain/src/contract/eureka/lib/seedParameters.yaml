@@ -1,5 +1,5 @@
 authors: 20
-reviewers: 200
+reviewers: 150
 editors: 10
 id_length: 20
 key_length: 50
@@ -11,7 +11,7 @@ init_reviews_for_closing: 100
 
 max_coauthors: 4
 max_ref_authors: 10
-max_reviewers: 175
+max_reviewers: 125
 
 names:
   - "Arthur"
