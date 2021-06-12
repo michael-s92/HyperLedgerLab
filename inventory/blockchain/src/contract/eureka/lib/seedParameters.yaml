@@ -7,6 +7,7 @@ init_articles: 250
 init_open_reviewings: 10
 new_articles: 1000
 default_reviews: 50
+init_reviews_for_closing: 100
 
 max_coauthors: 4
 max_ref_authors: 10

@@ -12,7 +12,7 @@ class closeReviewingOfArticle {
         let randomAccessKey;
 
         // select process
-        let reviewings = seeds.openReviewingProcess;
+        let reviewings = seeds.reviewerForClosing;
         do{
             randomAccessKey = utils.getRandomInt(reviewings.length);
         } while(reviewings[randomAccessKey] === undefined);

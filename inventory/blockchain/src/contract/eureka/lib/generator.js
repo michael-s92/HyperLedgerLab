@@ -17,6 +17,7 @@ let initArticle = [];
 let openReviewingProcess = [];
 let newArticles = [];
 let defaultReview = [];
+let reviewerForClosing = [];
 
 const authorUserType = 'A';
 const reviewerUserType = 'R';
@@ -119,6 +120,14 @@ for (let i = 0; i < parameters.init_open_reviewings; i++) {
     openReviewingProcess.push(generateReviewingProcess(i, articleForProcess));
 }
 
+for (let i = 0; i < parameters.init_reviews_for_closing; i++) {
+
+    let articleForProcess = generateArticle(i, "R");
+    initArticle.push(articleForProcess);
+
+    reviewerForClosing.push(generateReviewingProcess(i, articleForProcess));
+}
+
 for (let i = 0; i < parameters.default_reviews; i++) {
     defaultReview.push(generateDefaultReview(i));
 }
@@ -130,7 +139,8 @@ const json = JSON.stringify({
     initArticle: initArticle,
     openReviewingProcess: openReviewingProcess,
     newArticles: newArticles,
-    defaultReview: defaultReview
+    defaultReview: defaultReview,
+    reviewerForClosing: reviewerForClosing
 }, null, 4);
 
 fs.writeFile('seeds.json', json, function (err) {
