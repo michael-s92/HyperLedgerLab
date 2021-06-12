@@ -11,7 +11,7 @@ init_reviews_for_closing: 100
 
 max_coauthors: 4
 max_ref_authors: 10
-max_reviewers: 125
+max_reviewers: 150
 
 names:
   - "Arthur"
