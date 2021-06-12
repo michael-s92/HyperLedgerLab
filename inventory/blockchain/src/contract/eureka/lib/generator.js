@@ -49,6 +49,20 @@ function takeRandomFromList(list, number, rootElement) {
     return Utils.getRandomSubarray(returnList, take);
 }
 
+function takeRandomFromListMinimum100(list, number, rootElement) {
+    let take = Utils.getRandomInt(number - 100) + 100;
+
+    let returnList = [...list];
+    if (rootElement !== undefined) {
+        const ind = returnList.indexOf(rootElement);
+        if (ind > -1) {
+            returnList.splice(ind, 1);
+        }
+    }
+
+    return Utils.getRandomSubarray(returnList, take);
+}
+
 function generateArticle(index, flag) {
 
     let title = flag + index + " " + Utils.generateRandomWord(10);
@@ -71,7 +85,7 @@ function generateArticle(index, flag) {
 function generateReviewingProcess(index, article) {
    
     let editor = editors[Utils.getRandomInt(editors.length)];
-    let reviewersSample = takeRandomFromList(reviewers, parameters.max_reviewers);
+    let reviewersSample = takeRandomFromListMinimum100(reviewers, parameters.max_reviewers);
 
     return {
         title: article.title,
