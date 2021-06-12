@@ -24,9 +24,9 @@ let testCasePermuation = [
 ];
 
 const testCasePermuationWeighted = [
-        [ 0, 50 ],
-        [ 1, 50 ],
-        [ 2, 250 ],
+        [ 0, 5 ],
+        [ 1, 5 ],
+        [ 2, 70 ],
         [ 3, 20 ]
 ];
 
