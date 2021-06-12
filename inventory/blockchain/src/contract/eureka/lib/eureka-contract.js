@@ -335,7 +335,8 @@ class EurekaContract extends Contract {
         let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
 
         //store review
-        reviewProcess.saveReview(reviewerId, mark, comment);
+        //reviewProcess.saveReview(reviewerId, mark, comment);
+        reviewProcess.saveReview("dummyId", mark, comment);
 
         let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
         await ctx.stub.putState(authorTitleReviewingIndexKey, Buffer.from(JSON.stringify(reviewProcess)));
