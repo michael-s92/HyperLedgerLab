@@ -332,7 +332,7 @@ class EurekaContract extends Contract {
         };
 
         resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
-        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
+        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Review: Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
 
         //store review
         //reviewProcess.saveReview(reviewerId, mark, comment);
@@ -394,10 +394,11 @@ class EurekaContract extends Contract {
         };
 
         let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
-        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
+        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Close: Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
 
         //close process and calculate mark
-        reviewProcess.closeReviewing();
+        //TODO: enable
+        //reviewProcess.closeReviewing();
         reviewProcess.calculateMark();
 
         //store new state to ledger
