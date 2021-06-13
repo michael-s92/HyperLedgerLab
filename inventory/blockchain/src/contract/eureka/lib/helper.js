@@ -16,6 +16,7 @@ class Helper {
             try{
                 res = await iterator.next();
             } catch(err){
+                throw new Error("Iterator.NEXT Error");
                 console.log(err);
                 return;
             }
@@ -56,7 +57,7 @@ class Helper {
         if(results.length === 1){
             return results[0];
         } else {
-            throw new Error(message);
+            throw new Error(message + ": size=" + results.length);
         }
     }
 

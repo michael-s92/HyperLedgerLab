@@ -297,7 +297,7 @@ class EurekaContract extends Contract {
 
         //check if reviewingProcess exists and if review has right to review that article
         let reviewingProcessQueryString = {};
-        reviewingProcessQueryString.selector = {
+        /*reviewingProcessQueryString.selector = {
             docType: ReviewingProcess.getDocType(),
             title: title,
             author_id: authorId,
@@ -316,7 +316,7 @@ class EurekaContract extends Contract {
 
         let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
         await Helper.throwErrorIfQueryResultIsNotEmpty(resultIterator, `Review not possible; Reviewer: ${reviewerId}, Title: ${title}, Author: ${authorId}`);
-
+*/
         //get review process from ledger
         reviewingProcessQueryString = {};
         reviewingProcessQueryString.selector = {
@@ -331,7 +331,7 @@ class EurekaContract extends Contract {
             }
         };
 
-        resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
+        let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
         let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Review: Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
 
         //store review
