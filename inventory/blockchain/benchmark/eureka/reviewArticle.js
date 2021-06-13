@@ -12,15 +12,15 @@ class reviewArticle {
         let randomAccessKey;
 
         // select process
-        let reviewings = seeds.openReviewingProcess;
+        let openProcess = seeds.openReviewingProcess;
         do{
-            randomAccessKey = utils.getRandomInt(reviewings.length);
-        } while(reviewings[randomAccessKey] === undefined);
+            randomAccessKey = utils.getRandomInt(openProcess.length);
+        } while(openProcess[randomAccessKey] === undefined);
 
-        let reviewing = reviewings[randomAccessKey];
+        let reviewingProcess = openProcess[randomAccessKey];
 
         // select reviewer
-        let reviewers = reviewing.reviewers;
+        let reviewers = reviewingProcess.reviewers;
         do{
             randomAccessKey = utils.getRandomInt(reviewers.length);
         } while(reviewers[randomAccessKey] === undefined);
@@ -36,9 +36,10 @@ class reviewArticle {
         let review = reviews[randomAccessKey];
 
         // reviewArticle(ctx, reviewerId, reviewerKey, authorId, title, mark, comment)
+        // second transaction posible: reviewArticleQuery
 	    args = {
                 chaincodeFunction: 'reviewArticle',
-                chaincodeArguments: [reviewer.id, reviewer.key, reviewing.author_id, reviewing.title, review.mark, review.comment]
+                chaincodeArguments: [reviewer.id, reviewer.key, reviewingProcess.author_id, reviewingProcess.title, review.mark, review.comment]
             };
 
 	    return args;

@@ -16,36 +16,29 @@
 
 'use strict';
 
-module.exports.info  = 'doNothing eureka';
+module.exports.info = 'doNothing eureka';
 
 let txIndex = 0;
 let bc, contx;
 
-module.exports.init = function(blockchain, context, args) {
+module.exports.init = function (blockchain, context, args) {
     bc = blockchain;
     contx = context;
 
     return Promise.resolve();
 };
 
-module.exports.run = function() {
+module.exports.run = function () {
     txIndex++;
 
-    let args;
-    if (bc.bcType === 'fabric-ccp') {
-        args = {
-            chaincodeFunction: 'doNothing',
-            chaincodeArguments: [],
-        };
-    } else {
-        args = {
-            verb: 'doNothing'
-        };
-    }
+    let args = {
+        chaincodeFunction: 'doNothing',
+        chaincodeArguments: [],
+    };
 
     return bc.invokeSmartContract(contx, 'eureka', 'v1', args, 30);
 };
 
-module.exports.end = function() {
+module.exports.end = function () {
     return Promise.resolve();
 };

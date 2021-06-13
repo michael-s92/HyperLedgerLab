@@ -26,6 +26,11 @@ class ReviewingProcess {
         this.reviews.push(new Review(reviewerId, mark, comment));
     }
 
+    reviewDoneFrom(reviewerId){
+
+        return this.reviews.findIndex(e => reviewerId === e.reviewer_id) !== -1;
+    }
+
     closeReviewing(){
         this.isClosed = true;
     }
@@ -57,6 +62,7 @@ class ReviewingProcess {
                     }
                 }
 
+                //(author_id, title, editor, reviewer_ids, reviews, isClosed, mark)
                 return new ReviewingProcess(obj.author_id, obj.title, editor, obj.reviewer_id, reviewObjs, obj.isClosed, obj.mark);
             }
         }

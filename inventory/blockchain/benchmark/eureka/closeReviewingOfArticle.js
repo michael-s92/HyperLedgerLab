@@ -13,6 +13,14 @@ class closeReviewingOfArticle {
 
         // select process
         let reviewings = seeds.reviewerForClosing;
+
+        let d = new Date();
+        let up = d.getSeconds() + 5;
+        for(let i = 0; i < up; i++){
+            let obj = reviewings.shift();
+            reviewings.push(obj);
+        }
+
         do{
             randomAccessKey = utils.getRandomInt(reviewings.length);
         } while(reviewings[randomAccessKey] === undefined);

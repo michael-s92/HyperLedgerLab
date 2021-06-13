@@ -8,6 +8,10 @@ class Utils {
         return new RandExp('.{'+ len +'}').gen();
     }
 
+    static generateRandomKey(len) {
+        return new RandExp('[a-zA-Z].{'+ (len - 1) +'}').gen();
+    }
+
     static generateRandomWord(len) {
         return new RandExp('[A-Z][a-z]{'+ (len - 1) +'}').gen();
     }

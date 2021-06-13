@@ -1,17 +1,17 @@
-authors: 20
+authors: 40
 reviewers: 150
 editors: 10
 id_length: 20
 key_length: 50
-init_articles: 200
-init_open_reviewings: 50
+init_articles: 250
+init_open_reviewings: 25
 new_articles: 1000
 default_reviews: 50
-init_reviews_for_closing: 100
+init_reviews_for_closing: 50
 
 max_coauthors: 4
 max_ref_authors: 10
-max_reviewers: 150
+max_reviewers: 10
 
 names:
   - "Arthur"

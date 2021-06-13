@@ -5,7 +5,6 @@ const read = require('read-yaml');
 const RandExp = require('randexp');
 
 const Utils = require('./utils');
-const { title } = require('process');
 
 
 const parameters = read.sync('seedParameters.yaml');
@@ -19,13 +18,14 @@ let newArticles = [];
 let defaultReview = [];
 let reviewerForClosing = [];
 
+
 const authorUserType = 'A';
 const reviewerUserType = 'R';
 const editorUserType = 'E';
 function generateUser(type, index) {
 
     let id = type + Utils.generateRandomWord(parameters.id_length) + index;
-    let key = Utils.generateRandomString(parameters.key_length);
+    let key = Utils.generateRandomKey(parameters.key_length);
     let name = type + ": " + parameters.names[Utils.getRandomInt(parameters.names.length)];
 
     return {
@@ -37,20 +37,6 @@ function generateUser(type, index) {
 
 function takeRandomFromList(list, number, rootElement) {
     let take = Utils.getRandomInt(number - 1) + 1;
-
-    let returnList = [...list];
-    if (rootElement !== undefined) {
-        const ind = returnList.indexOf(rootElement);
-        if (ind > -1) {
-            returnList.splice(ind, 1);
-        }
-    }
-
-    return Utils.getRandomSubarray(returnList, take);
-}
-
-function takeRandomFromListMinimum100(list, number, rootElement) {
-    let take = Utils.getRandomInt(number - 100) + 100;
 
     let returnList = [...list];
     if (rootElement !== undefined) {
@@ -85,7 +71,7 @@ function generateArticle(index, flag) {
 function generateReviewingProcess(index, article) {
    
     let editor = editors[Utils.getRandomInt(editors.length)];
-    let reviewersSample = takeRandomFromListMinimum100(reviewers, parameters.max_reviewers);
+    let reviewersSample = takeRandomFromList(reviewers, parameters.max_reviewers);
 
     return {
         title: article.title,

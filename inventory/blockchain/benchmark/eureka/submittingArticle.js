@@ -3,6 +3,7 @@
 
 const utils = require('./utils');
 const seeds = require('./seeds.json');
+const Utils = require('../../../src/masterCC/eureka/lib/utils');
 
 class submittingArticle {
 
@@ -18,11 +19,13 @@ class submittingArticle {
 
         let article = articles[randomAccessKey];
 
+        let d = new Date();
+        let randomTitle = "A" + d.getMinutes() + d.getSeconds() + ": " + article.title;
 
         // submittingArticle(ctx, title, author_id, coauthor_ids, ref_author_ids, fee, lref, authorKey)
 	    args = {
                 chaincodeFunction: 'submittingArticle',
-                chaincodeArguments: [article.title, article.author.id, JSON.stringify(article.coauthor_ids), JSON.stringify(article.refauthor_ids), article.fee, article.lref, article.author.key]
+                chaincodeArguments: [randomTitle, article.author.id, JSON.stringify(article.coauthor_ids), JSON.stringify(article.refauthor_ids), article.fee, article.lref, article.author.key]
             };
 
 	    return args;

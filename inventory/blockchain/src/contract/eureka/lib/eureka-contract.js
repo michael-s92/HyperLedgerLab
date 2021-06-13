@@ -75,11 +75,13 @@ class EurekaContract extends Contract {
             let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [reviewing.author_id, reviewing.title, "reviewing"]);
 
             let reviewingObj = new ReviewingProcess(reviewing.author_id, reviewing.title, editor, reviewers_id, reviews, false, 0);
+
             await ctx.stub.putState(authorTitleReviewingIndexKey, Buffer.from(JSON.stringify(reviewingObj)));
+
         }
 
-         //process of reviewing for closing
-         for (const reviewing of seeds.reviewerForClosing) {
+        //process of reviewing for closing
+        for (const reviewing of seeds.reviewerForClosing) {
 
             let reviews = [];
             let reviewers_id = reviewing.reviewers.map(e => e.id);
@@ -235,12 +237,14 @@ class EurekaContract extends Contract {
 
         //check all reviewers
         let reviewerIds = JSON.parse(reviewer_ids);
+        /*
         for (const reviewerId of reviewerIds) {
             let reviewerAsByte = await ctx.stub.getState(reviewerId);
             if (!reviewerAsByte || !reviewerAsByte.toString()) {
                 throw new Error(`Reviewer ${reviewerId} doesnt exist`);
             }
         }
+        */
 
         //create object, assign reviewers
         let reviewing = new ReviewingProcess(authorId, title, editor, reviewerIds, [], false, 0);
@@ -249,6 +253,84 @@ class EurekaContract extends Contract {
         //notify reviewers
         let payload = new DoReviewEvent(authorId, title, reviewerIds);
         ctx.stub.setEvent('do_review_event', Buffer.from(JSON.stringify(payload)));
+    }
+
+    async reviewArticleQuery(ctx, reviewerId, reviewerKey, authorId, title, mark, comment) {
+
+        //check all inputs
+        if (reviewerId.length <= 0) {
+            throw new Error("reviewerId must be non-empty string");
+        }
+        if (reviewerKey.length <= 0) {
+            throw new Error("reviewerKey must be non-empty string");
+        }
+        if (authorId.length <= 0) {
+            throw new Error("authorId must be non-empty string");
+        }
+        if (title.length <= 0) {
+            throw new Error("title must be non-empty string");
+        }
+        if (mark.length <= 0) {
+            throw new Error("mark must be non-empty string");
+        } else if (isNaN(mark)) {
+            throw new Error("mark must be a numeric string");
+        }
+        if (comment.length <= 0) {
+            throw new Error("comment must be non-empty string");
+        }
+
+        //check reviewer with key
+        let reviewerAsBytes = await ctx.stub.getState(reviewerId);
+        if (!Helper.objExists(reviewerAsBytes)) {
+            throw new Error(`Reviewer ${reviewerId} doesnt exist`);
+        }
+
+        let reviewerJson = {};
+        try {
+            reviewerJson = JSON.parse(reviewerAsBytes.toString());
+        } catch (err) {
+            throw new Error(`Failed to parse Reviewer ${reviewerId}, err: ${err}`);
+        }
+        let reviewer = Reviewer.fromJSON(reviewerJson);
+
+        let hashedKey = sha512(reviewerKey);
+        if (hashedKey !== reviewer.hashedKey) {
+            console.log(`Invalid reviewer key for reviewerId ${reviewerId}`);
+            return;
+        }
+
+        //get review process from ledger
+        let reviewingProcessQueryString = {};
+        reviewingProcessQueryString.selector = {
+            docType: ReviewingProcess.getDocType(),
+            title: title,
+            author_id: authorId,
+            isClosed: false,
+            reviewer_ids: {
+                $elemMatch: {
+                    $eq: reviewerId
+                }
+            }
+        };
+
+        let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
+        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Review: Get ReviewProcess Error; Title: ${title}, Author: ${authorId}, Reviewer: ${reviewerId}, Found ${JSON.stringify(found)}, FoundJSON ${JSON.stringify(foundjson)}`);
+
+        if (reviewProcess.reviewDoneFrom(reviewerId)) {
+            throw new Error("Review already done");
+        }
+
+
+        //store review
+        //reviewProcess.saveReview(reviewerId, mark, comment);
+        reviewProcess.saveReview("dummyId", mark, comment);
+
+        let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
+        await ctx.stub.putState(authorTitleReviewingIndexKey, Buffer.from(JSON.stringify(reviewProcess)));
+
+        //send event to editor that review is done
+        let payload = new ReviewDoneEvent(authorId, title, reviewProcess.editor.id);
+        ctx.stub.setEvent('review_done_event', Buffer.from(JSON.stringify(payload)));
     }
 
     async reviewArticle(ctx, reviewerId, reviewerKey, authorId, title, mark, comment) {
@@ -295,44 +377,24 @@ class EurekaContract extends Contract {
             return;
         }
 
-        //check if reviewingProcess exists and if review has right to review that article
-        let reviewingProcessQueryString = {};
-        /*reviewingProcessQueryString.selector = {
-            docType: ReviewingProcess.getDocType(),
-            title: title,
-            author_id: authorId,
-            isClosed: false,
-            reviewer_ids: {
-                $elemMatch: {
-                    $eq: reviewerId
-                }
-            },
-            reviews: {
-                $elemMatch: {
-                    reviewer_id: reviewerId
-                }
-            }
-        };
+        let processCompositeKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
+        let foundAsByter = await ctx.stub.getState(processCompositeKey);
 
-        let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
-        await Helper.throwErrorIfQueryResultIsNotEmpty(resultIterator, `Review not possible; Reviewer: ${reviewerId}, Title: ${title}, Author: ${authorId}`);
-*/
-        //get review process from ledger
-        reviewingProcessQueryString = {};
-        reviewingProcessQueryString.selector = {
-            docType: ReviewingProcess.getDocType(),
-            title: title,
-            author_id: authorId,
-            isClosed: false,
-            reviewer_ids: {
-                $elemMatch: {
-                    $eq: reviewerId
-                }
-            }
-        };
+        if (!foundAsByter || !foundAsByter.toString()) {
+            throw new Error(`foundAsByter doesnt exist`);
+        }
 
-        let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
-        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Review: Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
+        let foundjson = {};
+        try {
+            foundjson = JSON.parse(foundAsByter.toString());
+        } catch (err) {
+            throw new Error(`Failed to parse found, err: ${err}`);
+        }
+        let reviewProcess = ReviewingProcess.fromJSON(foundjson);
+
+        if (reviewProcess.reviewDoneFrom(reviewerId)) {
+            throw new Error("Review already done");
+        }
 
         //store review
         //reviewProcess.saveReview(reviewerId, mark, comment);
@@ -394,11 +456,10 @@ class EurekaContract extends Contract {
         };
 
         let resultIterator = await ctx.stub.getQueryResult(JSON.stringify(reviewingProcessQueryString));
-        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Close: Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
+        let reviewProcess = await Helper.onlyOneResultOrThrowError(resultIterator, `Get ReviewProcess Error; Title: ${title}, Author: ${authorId}`);
 
         //close process and calculate mark
-        //TODO: enable
-        //reviewProcess.closeReviewing();
+        reviewProcess.closeReviewing();
         reviewProcess.calculateMark();
 
         //store new state to ledger
@@ -409,9 +470,6 @@ class EurekaContract extends Contract {
     }
 
     //TODO: calculate fee for some user ???
-
-    //TODO: registerAuthor, registerReviewer, registerEditor ???
-
 }
 
 module.exports = EurekaContract

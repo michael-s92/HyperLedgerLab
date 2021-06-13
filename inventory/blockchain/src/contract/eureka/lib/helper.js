@@ -10,17 +10,14 @@ class Helper {
 
     static async getAllResults(iterator){
         let allResults = [];
-
+        let res;
         while(true){
-            let res;
             try{
                 res = await iterator.next();
             } catch(err){
-                throw new Error("Iterator.NEXT Error");
-                console.log(err);
-                return;
+                throw new Error("Iterator.NEXT error");
             }
-
+            
             if(res.value && res.value.value.toString()){
                 try{
                     let json = JSON.parse(res.value.value.toString('utf8'));
@@ -57,7 +54,7 @@ class Helper {
         if(results.length === 1){
             return results[0];
         } else {
-            throw new Error(message + ": size=" + results.length);
+            throw new Error(message + "; size=" + results.length);
         }
     }
 
