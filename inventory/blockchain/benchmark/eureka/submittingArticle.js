@@ -3,7 +3,6 @@
 
 const utils = require('./utils');
 const seeds = require('./seeds.json');
-const Utils = require('../../../src/masterCC/eureka/lib/utils');
 
 class submittingArticle {
 
