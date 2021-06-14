@@ -4,8 +4,8 @@
 # Chaincode name can be provided by CLI: e.g get_metrics.sh fabcar
 
 
-source `dirname $0`/setup_env.sh 
-sleep 30s
+#source `dirname $0`/setup_env.sh 
+#sleep 30s
 base_dir=$INVENTORY_DIR_PATH/blockchain/benchmark
 script_dir="$(dirname "$INVENTORY_DIR_PATH")"/scripts
 chaincode=fabcar
