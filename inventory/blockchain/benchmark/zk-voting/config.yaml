@@ -1,8 +1,8 @@
 ---
 test:
-  workers:
+  clients:
     type: local
-    number: 1
+    number: 10
 
   rounds:
   - label: initLedger
@@ -34,8 +34,9 @@ test:
 
 monitor:
   type:
-  - docker
-  docker:
-    name:
-    - all
+  - process
+  process:
+  - command: node
+    arguments: local-client.js
+    multiOutput: avg
   interval: 1
