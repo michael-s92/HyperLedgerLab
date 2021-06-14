@@ -88,5 +88,6 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+apply plugin:'base'
 
 check.dependsOn jacocoTestCoverageVerification
