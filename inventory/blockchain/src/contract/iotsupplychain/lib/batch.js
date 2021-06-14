@@ -27,25 +27,34 @@ class Batch {
 
     //TODO: calculate discount: look at labResults and iterate over warehouseAnalysis
     calculateDiscount() {
-        let avg_moisture = 0;
-        this.warehouseAnalysis.forEach(e => avg_moisture += e.moisture_percent);
-        avg_moisture = avg_moisture / this.warehouseAnalysis.length;
 
+
+        let avg_moisture = 0;
+
+        if (this.warehouseAnalysis.length !== 0) {
+
+            this.warehouseAnalysis.forEach(e => avg_moisture += e.moisture_percent);
+            avg_moisture = avg_moisture / this.warehouseAnalysis.length;
+        }
+        
         let discount = 0;
 
         if (avg_moisture > 12) {
             discount += (avg_moisture - 12) * 4;
         }
-        if (this.labResult.impurity_percent > 3) {
-            discount += (this.labResult.impurity_percent - 3) * 2.5;
-        }
-        if (this.labResult.broken_percent > 5) {
-            discount += (this.labResult.broken_percent - 5) * 1;
-        }
-        if (this.labResult.damaged_percent > 3) {
-            discount += (this.labResult.damaged_percent - 3) * 3.5;
-        }
 
+        if (this.labResult !== undefined) {
+
+            if (this.labResult.impurity_percent > 3) {
+                discount += (this.labResult.impurity_percent - 3) * 2.5;
+            }
+            if (this.labResult.broken_percent > 5) {
+                discount += (this.labResult.broken_percent - 5) * 1;
+            }
+            if (this.labResult.damaged_percent > 3) {
+                discount += (this.labResult.damaged_percent - 3) * 3.5;
+            }
+        }
         this.discount = discount;
     }
 
