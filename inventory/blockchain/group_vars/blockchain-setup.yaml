@@ -58,12 +58,13 @@ channels:                   # List of channel objects
 #        metadataPath: ""
 #        language: golang
 #        version: v1
-#      - id: fabcar
-#        contractID: fabcar               # NOTE: This should be unique for chaincodes across channels
-#        path: "contract/fabcar/go/"      # NOTE: Path to Directory where chaincode file is located
-#        metadataPath: ""
-#        language: golang
-#        version: v1
+      - id: fabcar
+        contractID: fabcar               # NOTE: This should be unique for chaincodes across channels
+        path: "{{ inventory_dir }}/src/contractcontract/fabcar/java/"      # NOTE: Path to Directory where chaincode file is located
+#        metadataPath: "{{ inventory_dir }}/src/contract/fabcar/java/metadata"
+        metadataPath: ""
+        language: java
+        version: v1
 #      - id: notarization
 #        contractID: notarization               # NOTE: This should be unique for chaincodes across channels
 #        path: "{{ inventory_dir }}/src/contract/notarization/"      # NOTE: Path to Directory where chaincode file is located
@@ -76,12 +77,12 @@ channels:                   # List of channel objects
 #        metadataPath: "{{ inventory_dir }}/src/contract/notarization-v2/metadata/"
 #        language: node
 #        version: v1
-      - id: covid-passport
-        contractID: covid-passport               # NOTE: This should be unique for chaincodes across channels
-        path: "contract/covid-passport/"      # NOTE: Path to Directory where chaincode file is located
-        metadataPath: "{{ inventory_dir }}/src/contract/covid-passport/metadata/"
-        language: golang
-        version: v1
+#      - id: covid-passport
+#        contractID: covid-passport               # NOTE: This should be unique for chaincodes across channels
+#        path: "contract/covid-passport/"      # NOTE: Path to Directory where chaincode file is located
+#        metadataPath: "{{ inventory_dir }}/src/contract/covid-passport/metadata/"
+#        language: golang
+#        version: v1
 #      - id: javatest
 #        contractID: javatest               # NOTE: This should be unique for chaincodes across channels
 #        path: "{{ inventory_dir }}/src/contract/javatest/"      # NOTE: Path to Directory where chaincode file is located
