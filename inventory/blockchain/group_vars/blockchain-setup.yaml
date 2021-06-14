@@ -76,12 +76,12 @@ channels:                   # List of channel objects
 #        metadataPath: "{{ inventory_dir }}/src/contract/notarization-v2/metadata/"
 #        language: node
 #        version: v1
-      - id: eureka
-        contractID: eureka              # NOTE: This should be unique for chaincodes across channels
-        path: "{{ inventory_dir }}/src/contract/eureka/"      # NOTE: Path to Directory where chaincode file is located
-        metadataPath: "{{ inventory_dir }}/src/contract/eureka/metadata/"
-        language: node
-        version: v1
+#      - id: eureka
+#        contractID: eureka              # NOTE: This should be unique for chaincodes across channels
+#        path: "{{ inventory_dir }}/src/contract/eureka/"      # NOTE: Path to Directory where chaincode file is located
+#        metadataPath: "{{ inventory_dir }}/src/contract/eureka/metadata/"
+#        language: node
+#        version: v1
 #      - id: iotsupplychain
 #        contractID: iotsupplychain              # NOTE: This should be unique for chaincodes across channels
 #        path: "{{ inventory_dir }}/src/contract/iotsupplychain/"      # NOTE: Path to Directory where chaincode file is located
@@ -94,6 +94,12 @@ channels:                   # List of channel objects
 #        metadataPath: "{{ inventory_dir }}/src/contract/supplychain/metadata/"
 #        language: node
 #        version: v1
+     - id: zk-voting
+        contractID: zk-voting              # NOTE: This should be unique for chaincodes across channels
+        path: "{{ inventory_dir }}/src/contract/zk-voting/"      # NOTE: Path to Directory where chaincode file is located
+        metadataPath: "{{ inventory_dir }}/src/contract/zk-voting/metadata/"
+        language: node
+        version: v1
 #      - id: electronic-health-record
 #        contractID: electronic-health-record
 #        path: "{{ inventory_dir }}/src/contract/electronic-health-record"

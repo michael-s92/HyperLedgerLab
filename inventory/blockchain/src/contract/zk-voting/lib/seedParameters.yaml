@@ -1,0 +1,7 @@
+admins: 5
+init_elections: 50
+new_elections: 100
+id_length: 20
+min_candidate_per_election: 10
+max_candidate_per_election: 25
+number_voters: 100
