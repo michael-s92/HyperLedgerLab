@@ -121,7 +121,9 @@ class IoTSupplychainContract extends Contract {
 
         // check if there is no LabResults
         if (batch.labResult !== undefined) {
-            throw new Error(`Batch ${batchId} already has labResults`);
+            //throw new Error(`Batch ${batchId} already has labResults`);
+            console.log(`Batch ${batchId} already has labResults`);
+            return;
         }
 
         // store LabResults
@@ -192,7 +194,7 @@ class IoTSupplychainContract extends Contract {
         }
 
         // move batch to producer
-        batch.leaveWarehous();
+        // batch.leaveWarehous();
 
         // save batch to state
         await ctx.stub.putState(batchId, Buffer.from(JSON.stringify(batch)));

@@ -17,11 +17,14 @@ class sendBanchToWarehouse {
 
         let batch = seeds.benchmarkBatchs[randomAccessKey];
 
+        let d = new Date();
+        let batchId = batch.id + d.getMinutes() + d.getSeconds();
+
         // sendBanchToWarehouse(ctx, batchId, farmerId, warehouseId)
 
         args = {
             chaincodeFunction: 'sendBanchToWarehouse',
-            chaincodeArguments: [batch.id, batch.farmerId, batch.warehouseId]
+            chaincodeArguments: [batchId, batch.farmerId, batch.warehouseId]
         };
 
         return args;
