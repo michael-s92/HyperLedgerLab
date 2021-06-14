@@ -60,7 +60,7 @@ channels:                   # List of channel objects
 #        version: v1
       - id: fabcar
         contractID: fabcar               # NOTE: This should be unique for chaincodes across channels
-        path: "{{ inventory_dir }}/src/contractcontract/fabcar/java/"      # NOTE: Path to Directory where chaincode file is located
+        path: "{{ inventory_dir }}/src/contract/fabcar/java/"      # NOTE: Path to Directory where chaincode file is located
 #        metadataPath: "{{ inventory_dir }}/src/contract/fabcar/java/metadata"
         metadataPath: ""
         language: java
