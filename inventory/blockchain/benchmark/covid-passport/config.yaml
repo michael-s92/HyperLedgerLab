@@ -1,0 +1,42 @@
+---
+test:
+  clients:
+    type: local
+    number: 10
+
+  - label: initLedger
+    txNumber: 
+    - 1             
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 1
+    callback: ../inventory/blockchain/benchmark/covid-passport/initLedger.js
+
+  - label: common
+    txDuration: 
+    - 120
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 125
+    callback: ../inventory/blockchain/benchmark/covid-passport/common.js
+
+  - label: readBlockchain
+    txNumber: 
+    - 1
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 1
+    callback: ../inventory/blockchain/benchmark/covid-passport/doNothing.js
+
+
+monitor:
+  type:
+  - process
+  process:
+  - command: node
+    arguments: local-client.js
+    multiOutput: avg
+  interval: 1
