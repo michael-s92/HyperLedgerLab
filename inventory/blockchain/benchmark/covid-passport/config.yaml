@@ -4,6 +4,7 @@ test:
     type: local
     number: 10
 
+  rounds:
   - label: initLedger
     txNumber: 
     - 1             

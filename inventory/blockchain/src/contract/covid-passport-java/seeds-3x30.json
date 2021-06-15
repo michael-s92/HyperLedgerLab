@@ -1,0 +1,471 @@
+{
+  "testFacilities": [
+    {
+      "id": "TF-0-DeutschesMuseum",
+      "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgrlPDKGaYXHWBGb/3LTuFQ7CCGDlMs0xHr2HgSTN5oe2hRANCAASB1g28k97xrCbwktz8aBMQ05B2U8Lrmp3m9J10EuAroqjibFNlDqG7XX4hPodjRw76MP15p/z3emKoydNnbKL6",
+      "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgdYNvJPe8awm8JLc/GgTENOQdlPC65qd5vSddBLgK6Ko4mxTZQ6hu11+IT6HY0cO+jD9eaf893piqMnTZ2yi+g=="
+    },
+    {
+      "id": "TF-1-Theresienwiese",
+      "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgOKRgPSAfD0d/EsUCfajpmcGxNo58WQxMEX+/5umCBRGhRANCAARAIaW20L9Q4Oxap/qY8ha6BQZN/eCT666GOomYnyTzv/UakkYpFs3uhQuUGDO19nscqnT6Jaz1m1fPK7DZOqAT",
+      "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEQCGlttC/UODsWqf6mPIWugUGTf3gk+uuhjqJmJ8k87/1GpJGKRbN7oULlBgztfZ7HKp0+iWs9ZtXzyuw2TqgEw=="
+    },
+    {
+      "id": "TF-2-Sonnenstraße",
+      "privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgvBCLFYhuY9eOGoSzHj+nu19KONYMGYt0h5VQILF/y+yhRANCAATmz/9yNLV7mIQ9EwsQ2qAECWRbIAL5YsN4iUmEPWRyQeIket5rFROalpA5rh8aP5wrjn1w7fUPMmclsj+r+AHC",
+      "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5s//cjS1e5iEPRMLENqgBAlkWyAC+WLDeIlJhD1kckHiJHreaxUTmpaQOa4fGj+cK459cO31DzJnJbI/q/gBwg=="
+    }
+  ],
+  "validDHPs": [
+    {
+      "id": "TF-1-Theresienwiese-Garry-0",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "MGFhZjdkNzU5YTRjZWM3MDAxM2Q3NmMwMmU2MDNlYTc0OTJkZWIxMDAyOWM3M2I0MjJkMmI2M2NjOTVjOTM1ZA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 35230755296524118476743632549023993476414079923321437736973625714042973687258,
+        "s": 66883647015338340767870791525874442083956258577118607871657633366526644072852
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Agustin-1",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "MzE0MTBjNGM3ZmQ1Y2ViOTRiOGZjNDM5N2MyN2VjOGM3M2JiMzBjMTJlMWNjOGVhYjcxN2MyM2JlODc3NmI5OA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 18513893659486327759123588056588084989408609991614336417896820975673049930017,
+        "s": 42530716795218042492830519820668686817785293538518666446331047576310795618763
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Brittney-2",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "M2UwM2UyM2JhN2U5YTcyYjExOGY3OTk2NjQyMzhhOWM4Y2U3ZmRkM2ZmYjE2Y2FmMzZjYzY3Yjg5NjU0ZTkwMw==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 49207209528378082024651068206740735917679477529325544246496358121507959010087,
+        "s": 49059300918667464492462527087770181906578039392813674038537419046896374939205
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Shanel-3",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "YjA3ZjUwMGVhNGE1NmRmNzdiYzhjZDVlM2Y4ZjM1NzBiMWE0ZTVhYzQ3NDc2Y2QxY2VmYjVhNDZmOTAxZjFiNA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 99037908527987310726438493373356065355040378326261400233746721540422344966751,
+        "s": 68469861926589202458014979079798178480203161206333332285278893357048294269524
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Randal-4",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "YWI3MTkzYTM0Yzg2MzdjMDU3MGE4ZGY2ZGJjOGFhOTJkNGRiM2YyODgyNWZhNjA5MGMxOTYwZjU5OGYyNmMwMA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 19590175751117782862490073987792261438113598518537313693406842742127934365095,
+        "s": 91149285563673557420861874543100321370352867351944811141973246257309418545589
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Lan-5",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "MWFjNjU3MTEzMTJlOTU4MjcxY2Q4MzFkYjFiOTFiNzM5NDZjYjE0MDgxODY4NjI3OWFkZjA4N2E3Y2IwYTQyYw==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 16584387561834802786766290174557630420011596901244507199739805766185768072767,
+        "s": 24564290751791981767444650607888940598769382684442479050362377264545171994671
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Agustin-6",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "MzE0MTBjNGM3ZmQ1Y2ViOTRiOGZjNDM5N2MyN2VjOGM3M2JiMzBjMTJlMWNjOGVhYjcxN2MyM2JlODc3NmI5OA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 67976023911253616737599089775346240224341099920782810775924741264490927877196,
+        "s": 37417488473942650389266996597616440279987860360093862950104007749244236462397
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Dacia-7",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "YmFlYjkzNzYyOTUyODA5OTAwNDNjNjhjNDQ5Zjg1NzU4NjJkNzFjZTNlZDE1MjBiZjU5ZGQwNDI5ZDM0OWZlMA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 40517036509981347217245319142189916852666278498501007650298986472652357213037,
+        "s": 46665129390845149842958886442377679111277956214082949107939573220096543912550
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Garry-8",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "MGFhZjdkNzU5YTRjZWM3MDAxM2Q3NmMwMmU2MDNlYTc0OTJkZWIxMDAyOWM3M2I0MjJkMmI2M2NjOTVjOTM1ZA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 56722164920060865975046525607441431263986941633418371134430514316357923414434,
+        "s": 57448236287058498766547996258158648477534507929486049668258282748983367306450
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Fidela-9",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "YzU2MDQ1OGY2OTcxMGE3ZjkyODMwODkxMzUwNTI0N2E0M2Q2YTJiM2FkYWRiNGE5ZWZhM2E4OGE3MWJiZDEwMw==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 12639157729885721483785107915629191982162960268991040505035662549670731977528,
+        "s": 29817349497264713281518253335804443455581776920866579019189732430820401255754
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Kim-10",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "ZDI1OTQ5ZWY5ZTc2MmZlN2NmYjljYzVkMTI1ZThhN2JiY2E1NjY2MmFiYzUxYjlkMGRjMGQyMjY1YWEyOGRjZQ==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 40851140083724531738290897966029519901664449540041780136124572598063964163516,
+        "s": 99637776814986127559859505925397472511861380544364221314926576909023295044182
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Brittney-11",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "M2UwM2UyM2JhN2U5YTcyYjExOGY3OTk2NjQyMzhhOWM4Y2U3ZmRkM2ZmYjE2Y2FmMzZjYzY3Yjg5NjU0ZTkwMw==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 22130446033716519528432422913482369275679522460073538337253088891051345053243,
+        "s": 22287465350176070087872754788051491815220546671733546744646730121925110086063
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Agustin-12",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "MzE0MTBjNGM3ZmQ1Y2ViOTRiOGZjNDM5N2MyN2VjOGM3M2JiMzBjMTJlMWNjOGVhYjcxN2MyM2JlODc3NmI5OA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 12480126761926451575063212133138527694976420404159742405364659052360120509436,
+        "s": 13714457278784355253812420195407182020033919394521488072604642964415631620156
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Shanel-13",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "YjA3ZjUwMGVhNGE1NmRmNzdiYzhjZDVlM2Y4ZjM1NzBiMWE0ZTVhYzQ3NDc2Y2QxY2VmYjVhNDZmOTAxZjFiNA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 45030063823693714942643325724684315036338965712114092375043980480578148599244,
+        "s": 8271299572597215086186442102760271714747738325095925426785376301751110212896
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Noel-14",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "MTc0NDkwM2Q1MDYyZTBmZTZiOTJhMmRmMjgzNDk1Zjk5ZTE2ZTlmNDI1NDZjNjliZTJiZTQzNDliNjU4NzI3Yg==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 110008307618040172467415759767500157198438544868375781263133702399950719531145,
+        "s": 90857867271998244763774937450299846029723153719824985607448439344672689468119
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Dacia-15",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "YmFlYjkzNzYyOTUyODA5OTAwNDNjNjhjNDQ5Zjg1NzU4NjJkNzFjZTNlZDE1MjBiZjU5ZGQwNDI5ZDM0OWZlMA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 58235211508661566493189277922361618137494861982930446443733525320031447599155,
+        "s": 12452312060817734079057308174079453304038239074384194020176561646015174986496
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Randal-16",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "YWI3MTkzYTM0Yzg2MzdjMDU3MGE4ZGY2ZGJjOGFhOTJkNGRiM2YyODgyNWZhNjA5MGMxOTYwZjU5OGYyNmMwMA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 44301025327997671703350934729101845248721906513276994200277742912178788934467,
+        "s": 58860489223378810688963426123420928792466173701827659539129247657436240079923
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Shanel-17",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "YjA3ZjUwMGVhNGE1NmRmNzdiYzhjZDVlM2Y4ZjM1NzBiMWE0ZTVhYzQ3NDc2Y2QxY2VmYjVhNDZmOTAxZjFiNA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 80326436118419117593464828614756053894615837732147231027204252828610387231118,
+        "s": 99404248285038407390679800645686939080507555998815035513924810351188999970077
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Delcie-18",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "MjJiYjVkNjEzMDdjMDhhOTEyOGNmM2IwMzI1MDVmMzNhNzJlNTBmYWJlZjUzNDAxNWVjODFiYzhhODc2ZjJmMQ==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 59308760207384531342374579975101551165573237750412123123118929897149002905144,
+        "s": 19844405142458823381952098865457377903559908687050230791538045272721170396004
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Octavio-19",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "NDliMmEwYjFkNTE2NTM5MTMzOWU0OGI5NmMwZDNkZjMzYTU0OTdjZTY5ZmQ4Njk1NjhhYWQ4YjI0N2JiYTAwYg==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 58270147532474360804387892465457520537945738469613196520434011148406129081207,
+        "s": 62384380409376652496929356612042331196008530082803333254794625645929530352979
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Tameka-20",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "MzkwZTgwNDY2ZDg2ZWZjYTA4NTFjMzY0MzBmMDk2NmIzYjJjYmExNDg1YTljYTRmNTk1MGRiMjE1ZTRkOTQ2OQ==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 35596900066034091159588743495665660280153597878443092777070455402406248199157,
+        "s": 89952334082243295819407066334551935860513547524290812785410116857024745903352
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Garry-21",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "MGFhZjdkNzU5YTRjZWM3MDAxM2Q3NmMwMmU2MDNlYTc0OTJkZWIxMDAyOWM3M2I0MjJkMmI2M2NjOTVjOTM1ZA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 50225072931908868505433440700740517429617243431260121856572137683043783211536,
+        "s": 82932074400527479381095893728375896697856331835620733697890955617181387087970
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Lan-22",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "MWFjNjU3MTEzMTJlOTU4MjcxY2Q4MzFkYjFiOTFiNzM5NDZjYjE0MDgxODY4NjI3OWFkZjA4N2E3Y2IwYTQyYw==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 1246423103725330554253439774642525685519847302126808677693559946160926733665,
+        "s": 15339291853924002788204821254291142032834685127675176713650681735216646664373
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Towanda-23",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "NjhhNjM0NjgxNmFhNjA4Y2U1ZWZiZjA4MGVjNDM5MWQ0NzI1MGVjZjY0MDU5OTE0ODE0NmViNzIxZDQyYjBiOQ==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 47056879087092821163634388511176666817570566586567565192350280251450744900919,
+        "s": 19473755363184536033221165669639263367420504701003789134914241610814629773459
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Shanel-24",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "YjA3ZjUwMGVhNGE1NmRmNzdiYzhjZDVlM2Y4ZjM1NzBiMWE0ZTVhYzQ3NDc2Y2QxY2VmYjVhNDZmOTAxZjFiNA==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 48820022152004958476616773128779934241647383577899684155222499717274885682159,
+        "s": 41866253870519479760167887761088240412872167821367922385337175630574018392375
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Agustin-25",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "MzE0MTBjNGM3ZmQ1Y2ViOTRiOGZjNDM5N2MyN2VjOGM3M2JiMzBjMTJlMWNjOGVhYjcxN2MyM2JlODc3NmI5OA==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 4192866945601384906786005329023373174231067913909527070950221528320408096652,
+        "s": 111890153610690534473736106666198021832186779697138604147782491467378715387861
+      }
+    },
+    {
+      "id": "TF-1-Theresienwiese-Tameka-26",
+      "data": {
+        "testFacilityId": "TF-1-Theresienwiese",
+        "patient": "MzkwZTgwNDY2ZDg2ZWZjYTA4NTFjMzY0MzBmMDk2NmIzYjJjYmExNDg1YTljYTRmNTk1MGRiMjE1ZTRkOTQ2OQ==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 35567425876120120165128053762860889826817739867632584517037305360001044424531,
+        "s": 99936726890206210389431630266019711190995655976944839732102611459276323070940
+      }
+    },
+    {
+      "id": "TF-2-Sonnenstraße-Elane-27",
+      "data": {
+        "testFacilityId": "TF-2-Sonnenstraße",
+        "patient": "Y2EzN2VkODRhYzJmN2U5YzlmZmVkOTFiMjQzYWY1OWYyNzAyM2QzYWY5ZjhmNDJjMTQ2OTNmZjU0MGNjOWU2MQ==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 90511346934963357092692110342995509653251643659586858554461006777466567225467,
+        "s": 11274437438553650279430217409187022133262604559440659401085767663829030413553
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Octavio-28",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "NDliMmEwYjFkNTE2NTM5MTMzOWU0OGI5NmMwZDNkZjMzYTU0OTdjZTY5ZmQ4Njk1NjhhYWQ4YjI0N2JiYTAwYg==",
+        "method": "PCR",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 99349325863677380403684097706523354879436277870938190253234230563458405864667,
+        "s": 92603460960317988000019029006134797726693716489832104815053539044286460485123
+      }
+    },
+    {
+      "id": "TF-0-DeutschesMuseum-Tameka-29",
+      "data": {
+        "testFacilityId": "TF-0-DeutschesMuseum",
+        "patient": "MzkwZTgwNDY2ZDg2ZWZjYTA4NTFjMzY0MzBmMDk2NmIzYjJjYmExNDg1YTljYTRmNTk1MGRiMjE1ZTRkOTQ2OQ==",
+        "method": "Antibody",
+        "result": false,
+        "date": "2021-06-13T02:00:00+02:00",
+        "expiryDate": "2021-06-16T02:00:00+02:00"
+      },
+      "signature": {
+        "r": 82497210189388090373559210573998907846351037844871576847389149068205903059191,
+        "s": 93362792469298594987545758690089945422059057812395114564272167409630051015731
+      }
+    }
+  ]
+}
