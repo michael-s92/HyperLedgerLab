@@ -20,7 +20,7 @@ test:
     rateControl:
     - type: fixed-rate
       opts:
-        tps: 125
+        tps: 75
     callback: ../inventory/blockchain/benchmark/iotsupplychain/common.js
 
   - label: readBlockchain
