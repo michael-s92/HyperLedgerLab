@@ -1,6 +1,6 @@
 farmers: 5
 warehouses: 50
-initBatchs: 500
+initBatchs: 200
 benchmarkBatchs: 100
 batchIdSize: 30
 labResults: 1000

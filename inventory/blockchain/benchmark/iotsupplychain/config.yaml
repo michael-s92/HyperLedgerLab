@@ -16,11 +16,11 @@ test:
 
   - label: common
     txDuration:
-    - 180
+    - 120
     rateControl:
     - type: fixed-rate
       opts:
-        tps: 200
+        tps: 125
     callback: ../inventory/blockchain/benchmark/iotsupplychain/common.js
 
   - label: readBlockchain
