@@ -1,7 +1,7 @@
 {
-  "name": "notarization_benchmark",
+  "name": "covid_passport_benchmark",
   "version": "1.0.0",
-  "description": "Package to support benchmark testing with a notarization application",
+  "description": "Package to support benchmark testing with a covid passport application",
   "author": "Milan Stefanovic",
   "license": "ISC",
   "dependencies": {

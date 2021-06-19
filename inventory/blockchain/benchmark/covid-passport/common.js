@@ -27,7 +27,7 @@ function isDefined(t) {
         return true;
 }
 
-module.exports.info = 'Eureka';
+module.exports.info = 'CovidPassport';
 
 let bc, contx;
 

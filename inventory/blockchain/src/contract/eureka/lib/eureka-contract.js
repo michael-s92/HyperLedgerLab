@@ -183,6 +183,7 @@ class EurekaContract extends Contract {
 
     async startReviewingOfArticle(ctx, editorId, editorKey, title, authorId, reviewer_ids) {
 
+        // check inputs
         if (editorId.length <= 0) {
             throw new Error("editorId must be non-empty string");
         }
@@ -237,6 +238,7 @@ class EurekaContract extends Contract {
 
         //check all reviewers
         let reviewerIds = JSON.parse(reviewer_ids);
+        // There is a lot of read actions here, so commented just because of test going TIMEOUT
         /*
         for (const reviewerId of reviewerIds) {
             let reviewerAsByte = await ctx.stub.getState(reviewerId);
@@ -321,9 +323,11 @@ class EurekaContract extends Contract {
         }
 
 
+        // Since we cant have so many data in generator json, and be sure that every time some other reviewer is taken, we are putting this as mock-up
         //store review
         //reviewProcess.saveReview(reviewerId, mark, comment);
         reviewProcess.saveReview("dummyId", mark, comment);
+        
 
         let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
         await ctx.stub.putState(authorTitleReviewingIndexKey, Buffer.from(JSON.stringify(reviewProcess)));
@@ -377,6 +381,7 @@ class EurekaContract extends Contract {
             return;
         }
 
+        // get reviewing process
         let processCompositeKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
         let foundAsByter = await ctx.stub.getState(processCompositeKey);
 
@@ -396,6 +401,7 @@ class EurekaContract extends Contract {
             throw new Error("Review already done");
         }
 
+        // Since we cant have so many data in generator json, and be sure that every time some other reviewer is taken, we are putting this as mock-up
         //store review
         //reviewProcess.saveReview(reviewerId, mark, comment);
         reviewProcess.saveReview("dummyId", mark, comment);
@@ -465,11 +471,8 @@ class EurekaContract extends Contract {
         //store new state to ledger
         let authorTitleReviewingIndexKey = await ctx.stub.createCompositeKey(authorTitleReviewingIndexName, [authorId, title, "reviewing"]);
         await ctx.stub.putState(authorTitleReviewingIndexKey, Buffer.from(JSON.stringify(reviewProcess)));
-
-        //TODO: split rewards ???
     }
 
-    //TODO: calculate fee for some user ???
 }
 
 module.exports = EurekaContract

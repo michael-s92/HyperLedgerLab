@@ -1,7 +1,7 @@
 {
-  "name": "eureka_benchmark",
+  "name": "zk_evoting_benchmark",
   "version": "1.0.0",
-  "description": "Package to support benchmark testing with a eureka application",
+  "description": "Package to support benchmark testing with a zk-e-voting application",
   "author": "Milan Stefanovic",
   "license": "ISC",
   "dependencies": {

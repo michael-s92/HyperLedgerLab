@@ -49,7 +49,7 @@ function isDefined(t) {
         return true;
 }
 
-module.exports.info = 'Eureka';
+module.exports.info = 'ZK-eVoting';
 
 let bc, contx;
 

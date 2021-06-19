@@ -47,6 +47,7 @@ class Election {
 
         this.votes.forEach(v => {
             
+            // reverse the value of the vote to get the position od the canditad in the list
             let ind = getBaseLog(2, v.vote);
             let cand = this.candidates[ind];
 

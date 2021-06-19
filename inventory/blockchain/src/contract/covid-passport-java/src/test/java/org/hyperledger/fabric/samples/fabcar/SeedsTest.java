@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public final class SeedsTest {
     @Test
     public void testLoadSeeds() throws IOException {
-        Seeds seeds = Seeds.loadSeeds();
-        assertNotNull(seeds);
+        assertNotNull(Seeds.get());
     }
 }

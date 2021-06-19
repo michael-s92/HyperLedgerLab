@@ -77,8 +77,10 @@ class ZKVotingContract extends Contract {
             return;
         }
 
+        // convert string to the list, because the list cant be input into transaction
         let candidatesList = JSON.parse(candidates);
 
+        // create and store election
         let election = new Election(electionId, candidatesList);
         await ctx.stub.putState(electionId, Buffer.from(JSON.stringify(election)));
     }
@@ -128,6 +130,7 @@ class ZKVotingContract extends Contract {
             return;
         }
 
+        // close election
         election.close();
         await ctx.stub.putState(electionId, Buffer.from(JSON.stringify(election)));
     }
@@ -183,11 +186,13 @@ class ZKVotingContract extends Contract {
             return;
         }
 
+        // check the vote
         let voteInd = election.candidates.findIndex(c => c === candidat);
         if(voteInd === -1 ){
             throw new Error("Unsupported voting - candidat error");
         }
 
+        // create the vote and store it in election
         let myvote = new MyVote(electionId, voterId, voteInd);
         election.storeVote(myvote);
 
@@ -198,7 +203,7 @@ class ZKVotingContract extends Contract {
 
         Helper.throwErrorIfStringIsEmpty(electionId);
 
-        // check electionId
+        // check electionId and get election
         let electionAsBytes = await ctx.stub.getState(electionId);
         if (!Helper.objExists(electionAsBytes)) {
             throw new Error(`Election ${electionId} doesnt exist`);
@@ -212,6 +217,7 @@ class ZKVotingContract extends Contract {
         }
         let election = Election.fromJSON(electionjson);
 
+        // calculate results
         let result = {
             election_id: electionId,
             results: election.getResults()
@@ -239,6 +245,7 @@ class ZKVotingContract extends Contract {
         }
         let election = Election.fromJSON(electionjson);
 
+        // check if the user has voted
         let result = {
             election_id: electionId,
             voted: election.hasVoted(voterId)
@@ -266,6 +273,7 @@ class ZKVotingContract extends Contract {
         }
         let election = Election.fromJSON(electionjson);
 
+        // check if the vote is valid
         let result = {
             election_id: electionId,
             voted: election.voteOK(voterId)

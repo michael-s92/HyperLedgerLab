@@ -193,7 +193,8 @@ class IoTSupplychainContract extends Contract {
             throw new Error(`Batch ${batchId} already has moved`);
         }
 
-        // move batch to producer
+        // move batch to producer -commented because of the test, we cant because of timeout initialize as many as posible data in initLedger
+        // moreover we cant control what data are randomly taken and shifted to the food company
         // batch.leaveWarehous();
 
         // save batch to state

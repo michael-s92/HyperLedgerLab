@@ -31,12 +31,14 @@ public final class Seeds {
 
     public static final String HOSTED_SEEDS_URL = "https://storage.googleapis.com/milan-thesis-21/covid-passport/seeds-3x30.json";
     private static final Genson genson = JsonConverters.Genson();
+    private static Seeds _seeds = null;
 
     @Property
     private final SeedTestFacility[] testFacilities;
 
     @Property()
     private final Dhp[] validDhps;
+
 
     public SeedTestFacility[] getTestFacilities() {
         return testFacilities;
@@ -70,6 +72,18 @@ public final class Seeds {
         return Objects.hash(getTestFacilities(), getValidDhps());
     }
 
+    public static Seeds get() throws IOException {
+        if (_seeds == null) {
+            _seeds = loadSeeds();
+        }
+        return _seeds;
+    }
+
+    private static Seeds loadSeeds() throws IOException {
+        JSONObject seedsJson = readJsonFromUrl(Seeds.HOSTED_SEEDS_URL);
+        return genson.deserialize(seedsJson.toString(), Seeds.class);
+    }
+
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -79,7 +93,7 @@ public final class Seeds {
         return sb.toString();
     }
 
-    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+    private static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
@@ -89,10 +103,5 @@ public final class Seeds {
         } finally {
             is.close();
         }
-    }
-
-    public static Seeds loadSeeds() throws IOException {
-        JSONObject seedsJson = readJsonFromUrl(Seeds.HOSTED_SEEDS_URL);
-        return genson.deserialize(seedsJson.toString(), Seeds.class);
     }
 }

@@ -16,7 +16,7 @@
 
 'use strict';
 
-module.exports.info = 'doNothing notarization';
+module.exports.info = 'doNothing Covid-Passport';
 
 let txIndex = 0;
 let bc, contx;

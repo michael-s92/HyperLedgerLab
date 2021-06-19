@@ -16,7 +16,7 @@
 
 'use strict';
 
-module.exports.info = 'Initializing Eureka.';
+module.exports.info = 'Initializing Covid-Passport';
 
 let txIndex = 0;
 let bc, contx;
